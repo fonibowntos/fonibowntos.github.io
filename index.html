@@ -1,5 +1,78 @@
-<html>
-<body>
-<h1>agathoniki.com</h1>
-</body>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>agathoniki.com</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: Georgia, "Times New Roman", Times, serif;
+            }
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                background-color: #cd8602;
+                opacity: 0.8;
+                background-image:
+                    radial-gradient(circle at center center, #ffffff, #cd8602),
+                    repeating-radial-gradient(
+                        circle at center center,
+                        #ffffff,
+                        #ffffff,
+                        4px,
+                        transparent 8px,
+                        transparent 4px
+                    );
+                background-blend-mode: multiply;
+
+                color: #000000;
+            }
+            h1 {
+                text-shadow: 4px 4px 4px black;
+                font-size: clamp(3rem, 12vw, 10rem);
+                margin: 0 0 0 0;
+                font-weight: 800;
+                color: #b266ff;
+                font-family: "Special Elite", system-ui;
+            }
+            .stack {
+                display: inline-block;
+                text-align: right;
+            }
+            a {
+                color: white;
+                font-family: Arial Black;
+                font-size: clamp(0.8085rem, 1.386vw, 1.097rem);
+                text-decoration: none;
+                font-weight: 600;
+                display: inline-block;
+                letter-spacing: 0.15em;
+            }
+            a .email-text {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stack">
+            <h1>Agathoniki.com</h1>
+            <a href="mailto:fonibowntos@gmail.com"
+                >💌 <span class="email-text">fonibowntos@gmail.com</span></a
+            >
+        </div>
+    </body>
 </html>
