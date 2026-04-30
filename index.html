@@ -46,6 +46,11 @@
                 justify-content: space-between;
                 padding: 32px 0 16px;
             }
+            .logo {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
             h1 {
                 margin: 0;
                 font-family: "Special Elite", system-ui;
@@ -54,6 +59,16 @@
                 color: #b266ff;
                 text-shadow: 4px 4px 4px black;
                 letter-spacing: 0.02em;
+                line-height: 1;
+            }
+            .logo-subtitle {
+                margin-top: 4px;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 18px;
+                font-style: italic;
+                color: #ffffff;
+                text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+                letter-spacing: 0.08em;
             }
             .email-link {
                 color: white;
@@ -153,7 +168,10 @@
     <body>
         <div class="container">
             <header class="site-header">
-                <h1>Agathoniki.com</h1>
+                <div class="logo">
+                    <h1>Agathoniki.com</h1>
+                    <span class="logo-subtitle">Orthodox nun</span>
+                </div>
                 <a class="email-link" href="mailto:fonibowntos@gmail.com"
                     >💌 <span class="email-text">fonibowntos@gmail.com</span></a
                 >
