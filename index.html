@@ -72,7 +72,7 @@
             }
             .email-link {
                 color: white;
-                font-family: "Arial Black", Arial, sans-serif;
+                font-family: Arial, sans-serif;
                 font-size: 16px;
                 font-weight: 600;
                 text-decoration: none;
@@ -116,28 +116,30 @@
                 transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
                 white-space: nowrap;
             }
-            .menu-sep {
+            .cross {
                 position: relative;
+                display: inline-block;
+                vertical-align: middle;
                 width: 12px;
                 height: 18px;
                 flex-shrink: 0;
                 user-select: none;
             }
-            .menu-sep::before,
-            .menu-sep::after {
+            .cross::before,
+            .cross::after {
                 content: "";
                 position: absolute;
                 background: #b266ff;
                 box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
             }
-            .menu-sep::before {
+            .cross::before {
                 top: 0;
                 bottom: 0;
                 left: 50%;
                 width: 2px;
                 margin-left: -1px;
             }
-            .menu-sep::after {
+            .cross::after {
                 top: 5px;
                 height: 2px;
                 left: 1px;
@@ -197,7 +199,7 @@
             <header class="site-header">
                 <div class="logo">
                     <h1>Agathoniki.com</h1>
-                    <span class="logo-subtitle">Orthodox nun</span>
+                    <span class="logo-subtitle">☦ Orthodox nun ☦</span>
                 </div>
                 <a class="email-link" href="mailto:fonibowntos@gmail.com"
                     >💌 <span class="email-text">Επικοινωνία</span></a
@@ -214,17 +216,17 @@
                             <li><a class="menu-link" href="#paramythia">Παραμύθια</a></li>
                         </ul>
                     </li>
-                    <li class="menu-sep" aria-hidden="true"></li>
+                    <li class="cross" aria-hidden="true"></li>
                     <li><a class="menu-link" href="#vioi-agion">Βίοι Αγίων</a></li>
-                    <li class="menu-sep" aria-hidden="true"></li>
+                    <li class="cross" aria-hidden="true"></li>
                     <li><a class="menu-link" href="#synaxaristis">Ορθόδοξος Συναξαριστής</a></li>
-                    <li class="menu-sep" aria-hidden="true"></li>
+                    <li class="cross" aria-hidden="true"></li>
                     <li><a class="menu-link" href="#palaia-diathiki">Παλαιά Διαθήκη</a></li>
-                    <li class="menu-sep" aria-hidden="true"></li>
+                    <li class="cross" aria-hidden="true"></li>
                     <li><a class="menu-link" href="#kaini-diathiki">Καινή Διαθήκη</a></li>
-                    <li class="menu-sep" aria-hidden="true"></li>
+                    <li class="cross" aria-hidden="true"></li>
                     <li><a class="menu-link" href="#ekklisiastika-vivlia">Εκκλησιαστικά Βιβλία</a></li>
-                    <li class="menu-sep" aria-hidden="true"></li>
+                    <li class="cross" aria-hidden="true"></li>
                     <li><a class="menu-link" href="#apokalypseis-erevnes">Αποκαλύψεις / Έρευνες</a></li>
                 </ul>
             </div>
