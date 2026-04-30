@@ -19,6 +19,8 @@
             body {
                 min-height: 100vh;
                 color: #000000;
+                position: relative;
+                isolation: isolate;
 
                 background-color: #cd8602;
                 background-image:
@@ -32,6 +34,17 @@
                         transparent 4px
                     );
                 background-blend-mode: multiply;
+            }
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image: url("images/ICXC_NIKA.svg");
+                background-repeat: repeat;
+                background-size: 120px 120px;
+                opacity: 0.1;
+                pointer-events: none;
+                z-index: -1;
             }
             .container {
                 max-width: 1200px;
@@ -51,7 +64,7 @@
                 flex-direction: column;
                 align-items: flex-end;
             }
-            h1 {
+            .logo-title {
                 margin: 0;
                 font-family: "Special Elite", system-ui;
                 font-size: 56px;
@@ -113,7 +126,10 @@
                 text-decoration: none;
                 text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
                 border-bottom: 3px solid transparent;
-                transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+                transition:
+                    border-color 0.2s ease,
+                    color 0.2s ease,
+                    background-color 0.2s ease;
                 white-space: nowrap;
             }
             .cross {
@@ -192,13 +208,31 @@
                 padding: 48px 0;
                 min-height: 400px;
             }
+            .page-content {
+                background: rgba(255, 255, 255, 0.85);
+                border: 1px solid rgba(178, 102, 255, 0.4);
+                border-radius: 4px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                padding: 32px 40px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #1a1a1a;
+                font-size: 16px;
+                line-height: 1.7;
+            }
+            .page-content p {
+                margin: 0 0 1em;
+            }
+            .page-content p:last-child {
+                margin-bottom: 0;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <header class="site-header">
                 <div class="logo">
-                    <h1>Agathoniki.com</h1>
+                    <h1 class="logo-title">Agathoniki.com</h1>
                     <span class="logo-subtitle">☦ Orthodox nun ☦</span>
                 </div>
                 <a class="email-link" href="mailto:fonibowntos@gmail.com"
@@ -212,25 +246,139 @@
                     <li class="has-submenu">
                         <a class="menu-link" href="#paidika">Παιδικά</a>
                         <ul class="submenu">
-                            <li><a class="menu-link" href="#tragoudia">Τραγούδια</a></li>
-                            <li><a class="menu-link" href="#paramythia">Παραμύθια</a></li>
+                            <li>
+                                <a class="menu-link" href="#tragoudia"
+                                    >Τραγούδια</a
+                                >
+                            </li>
+                            <li>
+                                <a class="menu-link" href="#paramythia"
+                                    >Παραμύθια</a
+                                >
+                            </li>
                         </ul>
                     </li>
                     <li class="cross" aria-hidden="true"></li>
-                    <li><a class="menu-link" href="#vioi-agion">Βίοι Αγίων</a></li>
+                    <li>
+                        <a class="menu-link" href="#vioi-agion">Βίοι Αγίων</a>
+                    </li>
                     <li class="cross" aria-hidden="true"></li>
-                    <li><a class="menu-link" href="#synaxaristis">Ορθόδοξος Συναξαριστής</a></li>
+                    <li>
+                        <a class="menu-link" href="#synaxaristis"
+                            >Ορθόδοξος Συναξαριστής</a
+                        >
+                    </li>
                     <li class="cross" aria-hidden="true"></li>
-                    <li><a class="menu-link" href="#palaia-diathiki">Παλαιά Διαθήκη</a></li>
+                    <li>
+                        <a class="menu-link" href="#palaia-diathiki"
+                            >Παλαιά Διαθήκη</a
+                        >
+                    </li>
                     <li class="cross" aria-hidden="true"></li>
-                    <li><a class="menu-link" href="#kaini-diathiki">Καινή Διαθήκη</a></li>
+                    <li>
+                        <a class="menu-link" href="#kaini-diathiki"
+                            >Καινή Διαθήκη</a
+                        >
+                    </li>
                     <li class="cross" aria-hidden="true"></li>
-                    <li><a class="menu-link" href="#ekklisiastika-vivlia">Εκκλησιαστικά Βιβλία</a></li>
+                    <li>
+                        <a class="menu-link" href="#ekklisiastika-vivlia"
+                            >Εκκλησιαστικά Βιβλία</a
+                        >
+                    </li>
                     <li class="cross" aria-hidden="true"></li>
-                    <li><a class="menu-link" href="#apokalypseis-erevnes">Αποκαλύψεις / Έρευνες</a></li>
+                    <li>
+                        <a class="menu-link" href="#apokalypseis-erevnes"
+                            >Αποκαλύψεις / Έρευνες</a
+                        >
+                    </li>
                 </ul>
             </div>
         </nav>
-        <main class="container"></main>
+        <main class="container">
+            <div class="page-content">
+                <h1>Χριστός Ανέστη!</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                    aut fugit.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                    aut fugit.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                    aut fugit.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                    aut fugit.
+                </p>
+            </div>
+        </main>
     </body>
 </html>
