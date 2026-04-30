@@ -226,9 +226,23 @@
                 max-width: 80ch;
                 margin-left: auto;
                 margin-right: auto;
+                column-count: 2;
+                column-gap: 32px;
+            }
+            .page-content-inner > h1,
+            .page-content-inner > h2,
+            .page-content-inner > h3,
+            .page-content-inner > img {
+                column-span: all;
+            }
+            .page-content-inner > img {
+                max-width: 100%;
+                height: auto;
             }
             .page-content p {
                 margin: 0 0 1em;
+                text-align: justify;
+                hyphens: auto;
             }
             .page-content p:last-child {
                 margin-bottom: 0;
@@ -306,12 +320,6 @@
                     <li class="cross" aria-hidden="true"></li>
                     <li>
                         <a class="menu-link" href="#vioi-agion">Βίοι Αγίων</a>
-                    </li>
-                    <li class="cross" aria-hidden="true"></li>
-                    <li>
-                        <a class="menu-link" href="#synaxaristis"
-                            >Ορθόδοξος Συναξαριστής</a
-                        >
                     </li>
                     <li class="cross" aria-hidden="true"></li>
                     <li>
@@ -443,9 +451,6 @@
                             <a href="#paidika-tragoudia">Παιδικά Τραγούδια</a>
                         </li>
                         <li><a href="#vioi-agion">Βίοι Αγίων</a></li>
-                        <li>
-                            <a href="#synaxaristis">Ορθόδοξος Συναξαριστής</a>
-                        </li>
                         <li><a href="#palaia-diathiki">Παλαιά Διαθήκη</a></li>
                         <li><a href="#kaini-diathiki">Καινή Διαθήκη</a></li>
                         <li>
@@ -460,7 +465,7 @@
                         </li>
                     </ul>
                 </nav>
-                <p>☦ Agathoniki.com © 2026 ☦</p>
+                <p>Agathoniki.com © 2026</p>
                 <p>
                     Επικοινωνία:
                     <a href="mailto:fonibowntos@gmail.com"
