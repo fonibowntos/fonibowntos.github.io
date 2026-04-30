@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="el">
     <head>
         <meta charset="UTF-8" />
         <title>agathoniki.com</title>
@@ -14,19 +14,13 @@
             body {
                 margin: 0;
                 padding: 0;
-                height: 100%;
                 font-family: Georgia, "Times New Roman", Times, serif;
             }
             body {
                 min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
+                color: #000000;
 
                 background-color: #cd8602;
-                opacity: 0.8;
                 background-image:
                     radial-gradient(circle at center center, #ffffff, #cd8602),
                     repeating-radial-gradient(
@@ -38,41 +32,152 @@
                         transparent 4px
                     );
                 background-blend-mode: multiply;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 24px;
+                box-sizing: border-box;
+            }
 
-                color: #000000;
+            .site-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 32px 0 16px;
             }
             h1 {
-                text-shadow: 4px 4px 4px black;
-                font-size: clamp(3rem, 12vw, 10rem);
-                margin: 0 0 0 0;
+                margin: 0;
+                font-family: "Special Elite", system-ui;
+                font-size: 56px;
                 font-weight: 800;
                 color: #b266ff;
-                font-family: "Special Elite", system-ui;
+                text-shadow: 4px 4px 4px black;
+                letter-spacing: 0.02em;
             }
-            .stack {
-                display: inline-block;
-                text-align: right;
-            }
-            a {
+            .email-link {
                 color: white;
-                font-family: Arial Black;
-                font-size: clamp(0.8085rem, 1.386vw, 1.097rem);
-                text-decoration: none;
+                font-family: "Arial Black", Arial, sans-serif;
+                font-size: 16px;
                 font-weight: 600;
-                display: inline-block;
+                text-decoration: none;
                 letter-spacing: 0.15em;
+                white-space: nowrap;
             }
-            a .email-text {
+            .email-link .email-text {
                 text-decoration: underline;
+            }
+
+            .site-nav {
+                background: rgba(255, 255, 255, 0.55);
+                border-top: 2px solid #b266ff;
+                border-bottom: 2px solid #b266ff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+                margin-top: 8px;
+            }
+            .menu {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0;
+            }
+            .menu > li {
+                position: relative;
+                flex: 0 1 auto;
+            }
+            .menu a.menu-link {
+                display: block;
+                color: #000;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 14px;
+                letter-spacing: 0;
+                padding: 14px 8px;
+                text-decoration: none;
+                text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
+                border-bottom: 3px solid transparent;
+                transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+                white-space: nowrap;
+            }
+            .menu a.menu-link:hover,
+            .menu a.menu-link:focus {
+                color: #b266ff;
+                background-color: rgba(255, 255, 255, 0.4);
+                border-bottom-color: #b266ff;
+                outline: none;
+            }
+            .has-submenu > .menu-link::after {
+                content: " ▾";
+                font-size: 0.8em;
+                margin-left: 4px;
+            }
+
+            .submenu {
+                list-style: none;
+                margin: 0;
+                padding: 6px 0;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                min-width: 200px;
+                background: rgba(255, 255, 255, 0.97);
+                border: 1px solid #cd8602;
+                border-top: none;
+                box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+                display: none;
+                z-index: 10;
+            }
+            .has-submenu:hover > .submenu,
+            .has-submenu:focus-within > .submenu {
+                display: block;
+            }
+            .submenu a.menu-link {
+                padding: 10px 14px;
+                font-size: 14px;
+                text-align: left;
+                border-bottom: none;
+            }
+            .submenu a.menu-link:hover,
+            .submenu a.menu-link:focus {
+                border-bottom-color: transparent;
+            }
+
+            main {
+                padding: 48px 0;
+                min-height: 400px;
             }
         </style>
     </head>
     <body>
-        <div class="stack">
-            <h1>Agathoniki.com</h1>
-            <a href="mailto:fonibowntos@gmail.com"
-                >💌 <span class="email-text">fonibowntos@gmail.com</span></a
-            >
+        <div class="container">
+            <header class="site-header">
+                <h1>Agathoniki.com</h1>
+                <a class="email-link" href="mailto:fonibowntos@gmail.com"
+                    >💌 <span class="email-text">fonibowntos@gmail.com</span></a
+                >
+            </header>
         </div>
+        <nav class="site-nav" aria-label="Κύριο μενού">
+            <div class="container">
+                <ul class="menu">
+                    <li class="has-submenu">
+                        <a class="menu-link" href="#paidika">Παιδικά</a>
+                        <ul class="submenu">
+                            <li><a class="menu-link" href="#tragoudia">Τραγούδια</a></li>
+                            <li><a class="menu-link" href="#paramythia">Παραμύθια</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="menu-link" href="#vioi-agion">Βίοι Αγίων</a></li>
+                    <li><a class="menu-link" href="#synaxaristis">Ορθόδοξος Συναξαριστής</a></li>
+                    <li><a class="menu-link" href="#palaia-diathiki">Παλαιά Διαθήκη</a></li>
+                    <li><a class="menu-link" href="#kaini-diathiki">Καινή Διαθήκη</a></li>
+                    <li><a class="menu-link" href="#ekklisiastika-vivlia">Εκκλησιαστικά Βιβλία</a></li>
+                    <li><a class="menu-link" href="#apokalypseis-erevnes">Αποκαλύψεις / Έρευνες</a></li>
+                </ul>
+            </div>
+        </nav>
+        <main class="container"></main>
     </body>
 </html>
