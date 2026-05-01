@@ -2,7 +2,7 @@
 <html lang="el">
     <head>
         <meta charset="UTF-8" />
-        <title>Παιδικά Τραγούδια — agathoniki.com</title>
+        <title>Αποκαλύψεις / Έρευνες — agathoniki.com</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -169,7 +169,8 @@
                 right: 1px;
             }
             .menu a.menu-link:hover,
-            .menu a.menu-link:focus {
+            .menu a.menu-link:focus,
+            .menu a.menu-link[aria-current="page"] {
                 color: #b266ff;
                 background-color: rgba(255, 255, 255, 0.4);
                 border-bottom-color: #b266ff;
@@ -207,7 +208,8 @@
                 border-bottom: none;
             }
             .submenu a.menu-link:hover,
-            .submenu a.menu-link:focus {
+            .submenu a.menu-link:focus,
+            .submenu a.menu-link[aria-current="page"] {
                 border-bottom-color: transparent;
             }
 
@@ -243,25 +245,13 @@
             .page-content p:last-child {
                 margin-bottom: 0;
             }
-            .song-list {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
-            .song-list > li {
-                padding: 12px 0;
-                border-bottom: 1px dashed rgba(178, 102, 255, 0.4);
-            }
-            .song-list > li:last-child {
-                border-bottom: none;
-            }
-            .song-list a {
-                color: #b266ff;
-                text-decoration: none;
-            }
-            .song-list a:hover,
-            .song-list a:focus {
-                text-decoration: underline;
+            .placeholder-note {
+                margin-top: 1.5em;
+                padding: 16px 20px;
+                background: rgba(178, 102, 255, 0.08);
+                border-left: 3px solid #b266ff;
+                font-style: italic;
+                color: #555;
             }
 
             .site-footer {
@@ -331,12 +321,13 @@
                                 <a
                                     class="menu-link"
                                     href="paidika_tragoudia.html"
-                                    aria-current="page"
                                     >Τραγούδια</a
                                 >
                             </li>
                             <li>
-                                <a class="menu-link" href="paidika_paramythia.html"
+                                <a
+                                    class="menu-link"
+                                    href="paidika_paramythia.html"
                                     >Παραμύθια</a
                                 >
                             </li>
@@ -344,7 +335,9 @@
                     </li>
                     <li class="cross" aria-hidden="true"></li>
                     <li>
-                        <a class="menu-link" href="vioi_agion.html">Βίοι Αγίων</a>
+                        <a class="menu-link" href="vioi_agion.html"
+                            >Βίοι Αγίων</a
+                        >
                     </li>
                     <li class="cross" aria-hidden="true"></li>
                     <li>
@@ -366,7 +359,7 @@
                     </li>
                     <li class="cross" aria-hidden="true"></li>
                     <li>
-                        <a class="menu-link" href="apokalypseis_erevnes.html"
+                        <a class="menu-link" href="apokalypseis_erevnes.html" aria-current="page"
                             >Αποκαλύψεις / Έρευνες</a
                         >
                     </li>
@@ -382,18 +375,11 @@
         <main class="container">
             <div class="page-content">
                 <div class="page-content-inner">
-                    <h1>Παιδικά Τραγούδια</h1>
-                    <p>
-                        Καλώς ήλθατε στη συλλογή ορθοδόξων παιδικών τραγουδιών.
-                        Εδώ θα βρείτε τραγούδια για τις γιορτές της Εκκλησίας,
-                        για τους Αγίους μας και για τα μυστήρια της πίστεώς μας,
-                        γραμμένα και εκτελεσμένα με τρόπο απλό και κατανοητό για
-                        τα παιδιά.
+                    <h1>Αποκαλύψεις / Έρευνες</h1>
+                    <p>Συλλογή αποκαλύψεων Αγίων και ερευνών γύρω από θέματα της ορθοδόξου παραδόσεως. Αξίζει να γνωρίσουμε όσα μας έχουν παραδώσει οι Άγιοι Πατέρες, για να εμβαθύνουμε στην πίστη μας και να αντιμετωπίσουμε τα ερωτήματα της εποχής μας.</p>
+                    <p class="placeholder-note">
+                        Σύντομα διαθέσιμο περιεχόμενο.
                     </p>
-                    <h2>Συλλογή τραγουδιών</h2>
-                    <ul class="song-list">
-                        <li>Σύντομα διαθέσιμα τραγούδια.</li>
-                    </ul>
                 </div>
             </div>
         </main>
@@ -402,7 +388,9 @@
                 <nav aria-label="Δευτερεύον μενού">
                     <ul class="footer-nav">
                         <li>
-                            <a href="paidika_paramythia.html">Παιδικά Παραμύθια</a>
+                            <a href="paidika_paramythia.html"
+                                >Παιδικά Παραμύθια</a
+                            >
                         </li>
                         <li>
                             <a href="paidika_tragoudia.html"
@@ -410,7 +398,9 @@
                             >
                         </li>
                         <li><a href="vioi_agion.html">Βίοι Αγίων</a></li>
-                        <li><a href="palaia_diathiki.html">Παλαιά Διαθήκη</a></li>
+                        <li>
+                            <a href="palaia_diathiki.html">Παλαιά Διαθήκη</a>
+                        </li>
                         <li><a href="kaini_diathiki.html">Καινή Διαθήκη</a></li>
                         <li>
                             <a href="ekklisiastika_vivlia.html"
