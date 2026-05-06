@@ -334,6 +334,52 @@
                 color: #555;
                 font-style: italic;
             }
+
+            .book-gallery {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 20px;
+            }
+            .book-gallery a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                text-decoration: none;
+                color: #1a1a1a;
+                border-radius: 4px;
+                padding: 12px;
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease,
+                    border-color 0.2s ease;
+            }
+            .book-gallery a:hover,
+            .book-gallery a:focus {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+                border-color: #b266ff;
+                outline: none;
+            }
+            .book-gallery img {
+                width: 100%;
+                aspect-ratio: 3 / 4;
+                object-fit: cover;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+                background: #fff;
+                display: block;
+            }
+            .book-gallery .book-title {
+                margin-top: 10px;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 14px;
+                line-height: 1.3;
+                color: #000;
+            }
         </style>
     </head>
     <body>
@@ -424,20 +470,43 @@
                     <h1>Βίοι Αγίων</h1>
                     <p>Οι βίοι των Αγίων αποτελούν φωτεινά παραδείγματα πίστεως, αγάπης και υπομονής. Μέσα από τις ιστορίες των Αγίων μας μαθαίνουμε πως η αγιότητα είναι κλήση για κάθε Χριστιανό, που ζει με ταπείνωση, προσευχή και αγάπη προς τον Θεό και τον πλησίον.</p>
                     <h2>Διαθέσιμα βιβλία</h2>
-                    <ul>
+                    <ul class="book-gallery">
                         <li>
-                            <a href="agios_panteleimonas.html"
-                                >Ο Άγιος Παντελεήμονας ο Ιατρός</a
-                            >
+                            <a href="agios_panteleimonas.html">
+                                <img
+                                    src="images/AgiosPanteleimonas/1000021566_thumb.jpg"
+                                    alt="Εξώφυλλο: Ο Άγιος Παντελεήμονας ο Ιατρός"
+                                    loading="lazy"
+                                />
+                                <span class="book-title"
+                                    >Ο Άγιος Παντελεήμονας ο Ιατρός</span
+                                >
+                            </a>
                         </li>
                         <li>
-                            <a href="agia_matrona.html">Η Αγία Ματρώνα η Ρωσίδα</a>
+                            <a href="agia_matrona.html">
+                                <img
+                                    src="images/AgiaMatrona/page_001_thumb.jpg"
+                                    alt="Εξώφυλλο: Η Αγία Ματρώνα η Ρωσίδα"
+                                    loading="lazy"
+                                />
+                                <span class="book-title"
+                                    >Η Αγία Ματρώνα η Ρωσίδα</span
+                                >
+                            </a>
                         </li>
                         <li>
-                            <a href="agios_symeon_agios_ioannis.html"
-                                >Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος
-                                Ιωάννης</a
-                            >
+                            <a href="agios_symeon_agios_ioannis.html">
+                                <img
+                                    src="images/AgiosSymeonAgiosIoannis/ekso_thumb.jpg"
+                                    alt="Εξώφυλλο: Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος Ιωάννης"
+                                    loading="lazy"
+                                />
+                                <span class="book-title"
+                                    >Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος
+                                    Ιωάννης</span
+                                >
+                            </a>
                         </li>
                     </ul>
                 </div>
