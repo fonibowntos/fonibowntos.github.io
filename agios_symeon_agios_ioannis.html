@@ -2,7 +2,7 @@
 <html lang="el">
     <head>
         <meta charset="UTF-8" />
-        <title>Βίοι Αγίων — agathoniki.com</title>
+        <title>Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος Ιωάννης — agathoniki.com</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -334,6 +334,78 @@
                 color: #555;
                 font-style: italic;
             }
+
+            .book-stage {
+                margin: 24px auto 8px;
+                padding: 24px;
+                background: rgba(0, 0, 0, 0.08);
+                border: 1px solid rgba(178, 102, 255, 0.4);
+                border-radius: 4px;
+                box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+                display: flex;
+                justify-content: center;
+            }
+            #book {
+                background: #2a1a05;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+            }
+            #book .page {
+                background: #fff;
+                overflow: hidden;
+            }
+            #book .page img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                user-select: none;
+                -webkit-user-drag: none;
+            }
+            .book-controls {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+                margin: 12px 0 8px;
+                font-family: "Special Elite", Georgia, serif;
+            }
+            .book-controls button {
+                font-family: inherit;
+                font-size: 14px;
+                padding: 8px 16px;
+                background: rgba(255, 255, 255, 0.85);
+                color: #000;
+                border: 1px solid #b266ff;
+                border-radius: 4px;
+                cursor: pointer;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+                transition:
+                    background-color 0.2s ease,
+                    color 0.2s ease;
+            }
+            .book-controls button:hover,
+            .book-controls button:focus {
+                background: #b266ff;
+                color: #fff;
+                outline: none;
+            }
+            .book-controls button[disabled] {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+            .book-page-info {
+                font-size: 14px;
+                color: #000;
+                min-width: 8ch;
+                text-align: center;
+            }
+            .book-hint {
+                margin: 8px 0 0;
+                text-align: center;
+                font-size: 13px;
+                font-style: italic;
+                color: #555;
+            }
         </style>
     </head>
     <body>
@@ -375,7 +447,7 @@
                     </li>
                     <li class="cross" aria-hidden="true"></li>
                     <li>
-                        <a class="menu-link" href="vioi_agion.html" aria-current="page"
+                        <a class="menu-link" href="vioi_agion.html"
                             >Βίοι Αγίων</a
                         >
                     </li>
@@ -416,31 +488,32 @@
             <nav class="breadcrumbs" aria-label="Διαδρομή">
                 <ol>
                     <li><a href="index.html">Αρχική</a></li>
-                    <li aria-current="page">Βίοι Αγίων</li>
+                    <li><a href="vioi_agion.html">Βίοι Αγίων</a></li>
+                    <li aria-current="page">Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος Ιωάννης</li>
                 </ol>
             </nav>
             <div class="page-content">
                 <div class="page-content-inner">
-                    <h1>Βίοι Αγίων</h1>
-                    <p>Οι βίοι των Αγίων αποτελούν φωτεινά παραδείγματα πίστεως, αγάπης και υπομονής. Μέσα από τις ιστορίες των Αγίων μας μαθαίνουμε πως η αγιότητα είναι κλήση για κάθε Χριστιανό, που ζει με ταπείνωση, προσευχή και αγάπη προς τον Θεό και τον πλησίον.</p>
-                    <h2>Διαθέσιμα βιβλία</h2>
-                    <ul>
-                        <li>
-                            <a href="agios_panteleimonas.html"
-                                >Άγιος Παντελεήμων</a
-                            >
-                        </li>
-                        <li>
-                            <a href="agia_matrona.html">Αγία Ματρώνα</a>
-                        </li>
-                        <li>
-                            <a href="agios_symeon_agios_ioannis.html"
-                                >Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος
-                                Ιωάννης</a
-                            >
-                        </li>
-                    </ul>
+                    <h1>Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος Ιωάννης</h1>
+                    <p>
+                        Ο βίος του Αγίου Συμεών του δια Χριστόν Σαλού και του
+                        Αγίου Ιωάννου, σε μορφή εικονογραφημένου βιβλίου.
+                        Ξεφυλλίστε τις σελίδες σύροντας με το ποντίκι ή το
+                        δάκτυλο, ή χρησιμοποιώντας τα κουμπιά πλοήγησης.
+                    </p>
                 </div>
+
+                <div class="book-stage">
+                    <div id="book" aria-label="Εικονογραφημένο βιβλίο: Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος Ιωάννης"></div>
+                </div>
+                <div class="book-controls" role="group" aria-label="Πλοήγηση βιβλίου">
+                    <button type="button" id="prev-btn" aria-label="Προηγούμενη σελίδα">‹ Προηγούμενη</button>
+                    <span class="book-page-info" id="page-info" aria-live="polite">— / —</span>
+                    <button type="button" id="next-btn" aria-label="Επόμενη σελίδα">Επόμενη ›</button>
+                </div>
+                <p class="book-hint">
+                    Σύρετε τη γωνία της σελίδας για να την γυρίσετε.
+                </p>
             </div>
         </main>
         <footer class="site-footer">
@@ -483,5 +556,114 @@
                 </p>
             </div>
         </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+        <script>
+            (function () {
+                const basePath = "images/AgiosSymeonAgiosIoannis/";
+                const imageFiles = [
+                    "ekso.jpg",
+                    "symeon_01.jpg",
+                    "symeon_02.jpg",
+                    "symeon_03.jpg",
+                    "symeon_04.jpg",
+                    "symeon_05.jpg",
+                    "symeon_06.jpg",
+                    "symeon_07.jpg",
+                    "symeon_08.jpg",
+                    "symeon_09.jpg",
+                    "symeon_10.jpg",
+                    "symeon_11.jpg",
+                    "symeon_12.jpg",
+                    "symeon_13.jpg",
+                    "symeon_14.jpg",
+                    "symeon_15.jpg",
+                    "symeon_16.jpg",
+                    "symeon_17.jpg",
+                    "symeon_18.jpg",
+                    "symeon_19.jpg",
+                    "symeon_20.jpg",
+                    "symeon_21.jpg",
+                    "symeon_22.jpg",
+                    "symeon_23.jpg",
+                    "symeon_24.jpg",
+                    "symeon_25.jpg",
+                    "symeon_26.jpg",
+                    "symeon_27.jpg",
+                    "symeon_28.jpg",
+                    "symeon_29.jpg",
+                    "symeon_30.jpg",
+                    "symeon_31.jpg",
+                    "symeon_32.jpg",
+                    "symeon_33.jpg",
+                    "symeon_34.jpg",
+                    "symeon_35.jpg",
+                    "symeon_36.jpg",
+                    "symeon_37.jpg",
+                    "symeon_38.jpg",
+                    "symeon_39.jpg",
+                    "symeon_40.jpg",
+                    "symeon_41.jpg",
+                    "symeon_42.jpg",
+                    "symeon_43.jpg",
+                    "symeon_44.jpg",
+                    "symeon_45.jpg",
+                    "symeon_46.jpg",
+                    "symeon_47.jpg",
+                    "symeon_48.jpg",
+                    "symeon_piso.jpg",
+                ];
+                const imageUrls = imageFiles.map(function (f) {
+                    return basePath + f;
+                });
+
+                const bookEl = document.getElementById("book");
+                const prevBtn = document.getElementById("prev-btn");
+                const nextBtn = document.getElementById("next-btn");
+                const pageInfo = document.getElementById("page-info");
+
+                const pageFlip = new St.PageFlip(bookEl, {
+                    width: 550,
+                    height: 733,
+                    size: "stretch",
+                    minWidth: 315,
+                    maxWidth: 1000,
+                    minHeight: 420,
+                    maxHeight: 1350,
+                    maxShadowOpacity: 0.5,
+                    showCover: true,
+                    mobileScrollSupport: false,
+                    usePortrait: true,
+                });
+
+                pageFlip.loadFromImages(imageUrls);
+
+                function updateInfo() {
+                    const current = pageFlip.getCurrentPageIndex() + 1;
+                    const total = pageFlip.getPageCount();
+                    pageInfo.textContent = current + " / " + total;
+                    prevBtn.disabled = current <= 1;
+                    nextBtn.disabled = current >= total;
+                }
+
+                pageFlip.on("flip", updateInfo);
+                pageFlip.on("init", updateInfo);
+
+                prevBtn.addEventListener("click", function () {
+                    pageFlip.flipPrev();
+                });
+                nextBtn.addEventListener("click", function () {
+                    pageFlip.flipNext();
+                });
+
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "ArrowLeft") {
+                        pageFlip.flipPrev();
+                    } else if (e.key === "ArrowRight") {
+                        pageFlip.flipNext();
+                    }
+                });
+            })();
+        </script>
     </body>
 </html>
