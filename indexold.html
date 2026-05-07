@@ -78,6 +78,17 @@
             }
             .logo {
                 display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 16px;
+            }
+            .logo-image {
+                height: 110px;
+                width: auto;
+                display: block;
+            }
+            .logo-text {
+                display: flex;
                 flex-direction: column;
                 align-items: flex-end;
             }
@@ -295,8 +306,15 @@
         <div class="container">
             <header class="site-header">
                 <div class="logo">
-                    <h1 class="logo-title">Agathoniki.com</h1>
-                    <span class="logo-subtitle">Orthodox nun</span>
+                    <div class="logo-text">
+                        <h1 class="logo-title">Agathoniki.com</h1>
+                        <span class="logo-subtitle">Orthodox nun</span>
+                    </div>
+                    <img
+                        class="logo-image"
+                        src="images/agathoniki_nun.png"
+                        alt="Orthodox nun illustration"
+                    />
                 </div>
             </header>
         </div>
