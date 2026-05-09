@@ -11,83 +11,12 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="styles.css" />
-        <style>
-            .book-stage {
-                margin: 24px auto 8px;
-                padding: 24px;
-                background: rgba(0, 0, 0, 0.08);
-                border: 1px solid rgba(178, 102, 255, 0.4);
-                border-radius: 4px;
-                box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
-                display: flex;
-                justify-content: center;
-            }
-            #book {
-                background: #2a1a05;
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-            }
-            #book .page {
-                background: #fff;
-                overflow: hidden;
-            }
-            #book .page img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-                user-select: none;
-                -webkit-user-drag: none;
-            }
-            .book-controls {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 12px;
-                margin: 12px 0 8px;
-                font-family: "Special Elite", Georgia, serif;
-            }
-            .book-controls button {
-                font-family: inherit;
-                font-size: 14px;
-                padding: 8px 16px;
-                background: rgba(255, 255, 255, 0.85);
-                color: #000;
-                border: 1px solid #b266ff;
-                border-radius: 4px;
-                cursor: pointer;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-                transition:
-                    background-color 0.2s ease,
-                    color 0.2s ease;
-            }
-            .book-controls button:hover,
-            .book-controls button:focus {
-                background: #b266ff;
-                color: #fff;
-                outline: none;
-            }
-            .book-controls button[disabled] {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-            .book-page-info {
-                font-size: 14px;
-                color: #000;
-                min-width: 8ch;
-                text-align: center;
-            }
-            .book-hint {
-                margin: 8px 0 0;
-                text-align: center;
-                font-size: 13px;
-                font-style: italic;
-                color: #555;
-            }
-        </style>
         <script src="header.js" defer></script>
         <script src="menu.js" defer></script>
         <script src="footer.js" defer></script>
         <script src="breadcrumbs.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js" defer></script>
+        <script src="book-flip.js" defer></script>
     </head>
     <body>
         <site-header></site-header>
@@ -109,126 +38,58 @@
                     </p>
                 </div>
 
-                <div class="book-stage">
-                    <div id="book" aria-label="Εικονογραφημένο βιβλίο: Ο Άγιος Παντελεήμονας ο Ιατρός"></div>
-                </div>
-                <div class="book-controls" role="group" aria-label="Πλοήγηση βιβλίου">
-                    <button type="button" id="prev-btn" aria-label="Προηγούμενη σελίδα">‹ Προηγούμενη</button>
-                    <span class="book-page-info" id="page-info" aria-live="polite">— / —</span>
-                    <button type="button" id="next-btn" aria-label="Επόμενη σελίδα">Επόμενη ›</button>
-                </div>
-                <p class="book-hint">
-                    Σύρετε τη γωνία της σελίδας για να την γυρίσετε.
-                </p>
+                <book-flip base="images/AgiosPanteleimonas/" aria-label="Εικονογραφημένο βιβλίο: Ο Άγιος Παντελεήμονας ο Ιατρός">
+                    1000021566.jpg
+                    1000021568.jpg
+                    1000021570.jpg
+                    1000021577.jpg
+                    1000021578.jpg
+                    1000021581.jpg
+                    1000021583.jpg
+                    1000021585.jpg
+                    1000021587.jpg
+                    1000021589.jpg
+                    1000021591.jpg
+                    1000021593.jpg
+                    1000021595.jpg
+                    1000021599.jpg
+                    1000021617.jpg
+                    1000021621.jpg
+                    1000021623.jpg
+                    1000021625.jpg
+                    1000021631.jpg
+                    1000021633.jpg
+                    1000021635.jpg
+                    1000021637.jpg
+                    1000021639.jpg
+                    1000021641.jpg
+                    1000021643.jpg
+                    1000021645.jpg
+                    1000021647.jpg
+                    1000021649.jpg
+                    1000021651.jpg
+                    1000021653.jpg
+                    1000021655.jpg
+                    1000021657.jpg
+                    1000021659.jpg
+                    1000021661.jpg
+                    1000021663.jpg
+                    1000021665.jpg
+                    1000021667.jpg
+                    1000021669.jpg
+                    1000021671.jpg
+                    1000021673.jpg
+                    1000021675.jpg
+                    1000021677.jpg
+                    1000021679.jpg
+                    1000021681.jpg
+                    1000021683.jpg
+                    1000021685.jpg
+                    1000021687.jpg
+                    1000021688.jpg
+                </book-flip>
             </div>
         </main>
         <site-footer></site-footer>
-
-        <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
-        <script>
-            (function () {
-                const basePath = "images/AgiosPanteleimonas/";
-                const imageFiles = [
-                    "1000021566.jpg",
-                    "1000021568.jpg",
-                    "1000021570.jpg",
-                    "1000021577.jpg",
-                    "1000021578.jpg",
-                    "1000021581.jpg",
-                    "1000021583.jpg",
-                    "1000021585.jpg",
-                    "1000021587.jpg",
-                    "1000021589.jpg",
-                    "1000021591.jpg",
-                    "1000021593.jpg",
-                    "1000021595.jpg",
-                    "1000021599.jpg",
-                    "1000021617.jpg",
-                    "1000021621.jpg",
-                    "1000021623.jpg",
-                    "1000021625.jpg",
-                    "1000021631.jpg",
-                    "1000021633.jpg",
-                    "1000021635.jpg",
-                    "1000021637.jpg",
-                    "1000021639.jpg",
-                    "1000021641.jpg",
-                    "1000021643.jpg",
-                    "1000021645.jpg",
-                    "1000021647.jpg",
-                    "1000021649.jpg",
-                    "1000021651.jpg",
-                    "1000021653.jpg",
-                    "1000021655.jpg",
-                    "1000021657.jpg",
-                    "1000021659.jpg",
-                    "1000021661.jpg",
-                    "1000021663.jpg",
-                    "1000021665.jpg",
-                    "1000021667.jpg",
-                    "1000021669.jpg",
-                    "1000021671.jpg",
-                    "1000021673.jpg",
-                    "1000021675.jpg",
-                    "1000021677.jpg",
-                    "1000021679.jpg",
-                    "1000021681.jpg",
-                    "1000021683.jpg",
-                    "1000021685.jpg",
-                    "1000021687.jpg",
-                    "1000021688.jpg",
-                ];
-                const imageUrls = imageFiles.map(function (f) {
-                    return basePath + f;
-                });
-
-                const bookEl = document.getElementById("book");
-                const prevBtn = document.getElementById("prev-btn");
-                const nextBtn = document.getElementById("next-btn");
-                const pageInfo = document.getElementById("page-info");
-
-                const pageFlip = new St.PageFlip(bookEl, {
-                    width: 550,
-                    height: 733,
-                    size: "stretch",
-                    minWidth: 315,
-                    maxWidth: 1000,
-                    minHeight: 420,
-                    maxHeight: 1350,
-                    maxShadowOpacity: 0.5,
-                    showCover: true,
-                    mobileScrollSupport: false,
-                    usePortrait: true,
-                });
-
-                pageFlip.loadFromImages(imageUrls);
-
-                function updateInfo() {
-                    const current = pageFlip.getCurrentPageIndex() + 1;
-                    const total = pageFlip.getPageCount();
-                    pageInfo.textContent = current + " / " + total;
-                    prevBtn.disabled = current <= 1;
-                    nextBtn.disabled = current >= total;
-                }
-
-                pageFlip.on("flip", updateInfo);
-                pageFlip.on("init", updateInfo);
-
-                prevBtn.addEventListener("click", function () {
-                    pageFlip.flipPrev();
-                });
-                nextBtn.addEventListener("click", function () {
-                    pageFlip.flipNext();
-                });
-
-                document.addEventListener("keydown", function (e) {
-                    if (e.key === "ArrowLeft") {
-                        pageFlip.flipPrev();
-                    } else if (e.key === "ArrowRight") {
-                        pageFlip.flipNext();
-                    }
-                });
-            })();
-        </script>
     </body>
 </html>
