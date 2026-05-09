@@ -12,75 +12,12 @@
         />
         <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
         <link rel="stylesheet" href="styles.css" />
-        <style>
-            .audio-section {
-                margin-top: 2em;
-            }
-            .audio-section h2 {
-                font-family: "Special Elite", Georgia, serif;
-                color: #6f2dbd;
-            }
-            .plyr {
-                --plyr-color-main: #b266ff;
-                border-radius: 6px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            }
-            .audio-playlist {
-                list-style: none;
-                margin: 1.25em 0 0;
-                padding: 0;
-                border: 1px solid rgba(178, 102, 255, 0.4);
-                border-radius: 4px;
-                overflow: hidden;
-                background: rgba(255, 255, 255, 0.6);
-            }
-            .audio-playlist li {
-                margin: 0;
-            }
-            .audio-playlist button {
-                display: flex;
-                width: 100%;
-                align-items: center;
-                gap: 12px;
-                padding: 10px 16px;
-                background: transparent;
-                border: none;
-                border-bottom: 1px solid rgba(178, 102, 255, 0.2);
-                font-family: "Special Elite", Georgia, serif;
-                font-size: 15px;
-                color: #1a1a1a;
-                text-align: left;
-                cursor: pointer;
-                transition: background-color 0.15s ease, color 0.15s ease;
-            }
-            .audio-playlist li:last-child button {
-                border-bottom: none;
-            }
-            .audio-playlist button:hover,
-            .audio-playlist button:focus {
-                background-color: rgba(178, 102, 255, 0.12);
-                color: #6f2dbd;
-                outline: none;
-            }
-            .audio-playlist button[aria-current="true"] {
-                background-color: rgba(178, 102, 255, 0.2);
-                color: #6f2dbd;
-                font-weight: bold;
-            }
-            .audio-playlist .track-number {
-                display: inline-block;
-                min-width: 2.25em;
-                color: #b266ff;
-                font-weight: bold;
-            }
-            .audio-playlist .track-title {
-                flex: 1;
-            }
-        </style>
         <script src="header.js" defer></script>
         <script src="menu.js" defer></script>
         <script src="footer.js" defer></script>
         <script src="breadcrumbs.js" defer></script>
+        <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
+        <script src="audio-playlist.js" defer></script>
     </head>
     <body>
         <site-header></site-header>
@@ -96,121 +33,28 @@
                     <h1>Πες μου μαμά κάτι για τα Χριστούγεννα</h1>
                     <p>Ένα ορθόδοξο παιδικό παραμύθι αφηγημένο από τη μοναχή Αγαθονίκη. Επιλέξτε ένα μέρος από τη λίστα για να ακούσετε την ηχογράφηση.</p>
 
-                    <section class="audio-section" aria-label="Ηχογραφημένη αφήγηση">
-                        <audio id="staxy-player" controls preload="none">
-                            Ο φυλλομετρητής σας δεν υποστηρίζει την αναπαραγωγή ήχου.
-                        </audio>
-                        <ol class="audio-playlist" id="staxy-playlist"></ol>
-                    </section>
+                    <audio-playlist base="audio/PesMouMamaKatiGiaTaXristougenna/" aria-label="Ηχογραφημένη αφήγηση">
+                        01 - Nun Agathoniki - Πρόλογος.mp3 | Πρόλογος
+                        02 - Nun Agathoniki - Ιστορικά - Ενημερωτικά στοιχεία γιορτής.mp3 | Ιστορικά - Ενημερωτικά στοιχεία γιορτής
+                        03 - Nun Agathoniki - Σύλληψις Ιωάννου Προδρόμου - Όραμα Ζαχαρία.mp3 | Σύλληψις Ιωάννου Προδρόμου - Όραμα Ζαχαρία
+                        04 - Nun Agathoniki - Ευαγγελισμός Θεοτόκου.mp3 | Ευαγγελισμός Θεοτόκου
+                        05 - Nun Agathoniki - Ασπασμός Ελισσάβετ.mp3 | Ασπασμός Ελισσάβετ
+                        06 - Nun Agathoniki - Γεννέσιον Τ. Προδρόμου - Περιτομή - Προφητεία Ζαχαρία.mp3 | Γεννέσιον Τ. Προδρόμου - Περιτομή - Προφητεία Ζαχαρία
+                        07 - Nun Agathoniki - Αμφιβολία Ιωσήφ - Ποια ήταν η Μαριάμ.mp3 | Αμφιβολία Ιωσήφ - Ποια ήταν η Μαριάμ
+                        08 - Nun Agathoniki - Γέννησις - Βηθλεέμ.mp3 | Γέννησις - Βηθλεέμ
+                        09 - Nun Agathoniki - Βοσκοί - Άγγελοι.mp3 | Βοσκοί - Άγγελοι
+                        10 - Nun Agathoniki - Μάγοι - Ηρώδης - Προσκύνησις Μάγων.mp3 | Μάγοι - Ηρώδης - Προσκύνησις Μάγων
+                        11 - Nun Agathoniki - Περιτομή Ιησού.mp3 | Περιτομή Ιησού
+                        12 - Nun Agathoniki - Φυγή προς Αίγυπτο, ύστερα από Όραμα Ιωσήφ.mp3 | Φυγή προς Αίγυπτο, ύστερα από Όραμα Ιωσήφ
+                        13 - Nun Agathoniki - Σφαγή των Αγίων Νηπίων και τέλος Ηρώδη.mp3 | Σφαγή των Αγίων Νηπίων και τέλος Ηρώδη
+                        14 - Nun Agathoniki - Επιστροφή στη Ναζαρέτ από Αίγυπτο.mp3 | Επιστροφή στη Ναζαρέτ από Αίγυπτο
+                        15 - Nun Agathoniki - Ο Ιησούς 12 ετής στο Ναό.mp3 | Ο Ιησούς 12 ετής στο Ναό
+                        16 - Nun Agathoniki - Επίλογος.mp3 | Επίλογος
+                        17 - Nun Agathoniki - Βυζαντινά Κάλλαντα.mp3 | Βυζαντινά Κάλλαντα
+                    </audio-playlist>
                 </div>
             </div>
         </main>
         <site-footer></site-footer>
-        <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-        <script>
-            (function () {
-                var audioEl = document.getElementById("staxy-player");
-                var playlist = document.getElementById("staxy-playlist");
-                if (!audioEl || !playlist || typeof Plyr === "undefined") return;
-
-                var BASE = "audio/PesMouMamaKatiGiaTaXristougenna/";
-                var TRACKS = [
-                    { file: "01 - Nun Agathoniki - Πρόλογος.mp3", title: "Πρόλογος" },
-                    { file: "02 - Nun Agathoniki - Ιστορικά - Ενημερωτικά στοιχεία γιορτής.mp3", title: "Ιστορικά - Ενημερωτικά στοιχεία γιορτής" },
-                    { file: "03 - Nun Agathoniki - Σύλληψις Ιωάννου Προδρόμου - Όραμα Ζαχαρία.mp3", title: "Σύλληψις Ιωάννου Προδρόμου - Όραμα Ζαχαρία" },
-                    { file: "04 - Nun Agathoniki - Ευαγγελισμός Θεοτόκου.mp3", title: "Ευαγγελισμός Θεοτόκου" },
-                    { file: "05 - Nun Agathoniki - Ασπασμός Ελισσάβετ.mp3", title: "Ασπασμός Ελισσάβετ" },
-                    { file: "06 - Nun Agathoniki - Γεννέσιον Τ. Προδρόμου - Περιτομή - Προφητεία Ζαχαρία.mp3", title: "Γεννέσιον Τ. Προδρόμου - Περιτομή - Προφητεία Ζαχαρία" },
-                    { file: "07 - Nun Agathoniki - Αμφιβολία Ιωσήφ - Ποια ήταν η Μαριάμ.mp3", title: "Αμφιβολία Ιωσήφ - Ποια ήταν η Μαριάμ" },
-                    { file: "08 - Nun Agathoniki - Γέννησις - Βηθλεέμ.mp3", title: "Γέννησις - Βηθλεέμ" },
-                    { file: "09 - Nun Agathoniki - Βοσκοί - Άγγελοι.mp3", title: "Βοσκοί - Άγγελοι" },
-                    { file: "10 - Nun Agathoniki - Μάγοι - Ηρώδης - Προσκύνησις Μάγων.mp3", title: "Μάγοι - Ηρώδης - Προσκύνησις Μάγων" },
-                    { file: "11 - Nun Agathoniki - Περιτομή Ιησού.mp3", title: "Περιτομή Ιησού" },
-                    { file: "12 - Nun Agathoniki - Φυγή προς Αίγυπτο, ύστερα από Όραμα Ιωσήφ.mp3", title: "Φυγή προς Αίγυπτο, ύστερα από Όραμα Ιωσήφ" },
-                    { file: "13 - Nun Agathoniki - Σφαγή των Αγίων Νηπίων και τέλος Ηρώδη.mp3", title: "Σφαγή των Αγίων Νηπίων και τέλος Ηρώδη" },
-                    { file: "14 - Nun Agathoniki - Επιστροφή στη Ναζαρέτ από Αίγυπτο.mp3", title: "Επιστροφή στη Ναζαρέτ από Αίγυπτο" },
-                    { file: "15 - Nun Agathoniki - Ο Ιησούς 12 ετής στο Ναό.mp3", title: "Ο Ιησούς 12 ετής στο Ναό" },
-                    { file: "16 - Nun Agathoniki - Επίλογος.mp3", title: "Επίλογος" },
-                    { file: "17 - Nun Agathoniki - Βυζαντινά Κάλλαντα.mp3", title: "Βυζαντινά Κάλλαντα" },
-                ];
-                TRACKS.forEach(function (track, idx) {
-                    var i = idx + 1;
-                    var li = document.createElement("li");
-                    var btn = document.createElement("button");
-                    btn.type = "button";
-                    btn.setAttribute("data-src", BASE + encodeURIComponent(track.file));
-                    if (i === 1) btn.setAttribute("aria-current", "true");
-                    var num1 = document.createElement("span");
-                    num1.className = "track-number";
-                    num1.textContent = i + ".";
-                    var title = document.createElement("span");
-                    title.className = "track-title";
-                    title.textContent = track.title;
-                    btn.appendChild(num1);
-                    btn.appendChild(title);
-                    li.appendChild(btn);
-                    playlist.appendChild(li);
-                });
-
-                var firstBtn = playlist.querySelector("button[data-src]");
-                if (firstBtn) {
-                    var srcEl = document.createElement("source");
-                    srcEl.src = firstBtn.getAttribute("data-src");
-                    srcEl.type = "audio/mpeg";
-                    audioEl.appendChild(srcEl);
-                }
-
-                var player = new Plyr(audioEl, {
-                    controls: [
-                        "play",
-                        "progress",
-                        "current-time",
-                        "duration",
-                        "mute",
-                        "volume",
-                        "settings",
-                    ],
-                    settings: ["speed"],
-                    speed: { selected: 1, options: [0.75, 1, 1.25, 1.5, 1.75, 2] },
-                    i18n: {
-                        play: "Αναπαραγωγή",
-                        pause: "Παύση",
-                        mute: "Σίγαση",
-                        unmute: "Άρση σίγασης",
-                        volume: "Ένταση",
-                        settings: "Ρυθμίσεις",
-                        speed: "Ταχύτητα",
-                        normal: "Κανονική",
-                    },
-                });
-
-                var buttons = playlist.querySelectorAll("button[data-src]");
-                buttons.forEach(function (btn) {
-                    btn.addEventListener("click", function () {
-                        var src = btn.getAttribute("data-src");
-                        buttons.forEach(function (b) {
-                            b.removeAttribute("aria-current");
-                        });
-                        btn.setAttribute("aria-current", "true");
-                        player.source = {
-                            type: "audio",
-                            sources: [{ src: src, type: "audio/mpeg" }],
-                        };
-                        player.play();
-                    });
-                });
-
-                player.on("ended", function () {
-                    var current = playlist.querySelector(
-                        'button[aria-current="true"]'
-                    );
-                    if (!current) return;
-                    var next = current.parentElement.nextElementSibling;
-                    if (!next) return;
-                    var nextBtn = next.querySelector("button[data-src]");
-                    if (nextBtn) nextBtn.click();
-                });
-            })();
-        </script>
     </body>
 </html>

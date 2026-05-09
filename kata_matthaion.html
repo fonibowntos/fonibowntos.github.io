@@ -12,75 +12,12 @@
         />
         <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
         <link rel="stylesheet" href="styles.css" />
-        <style>
-            .audio-section {
-                margin-top: 2em;
-            }
-            .audio-section h2 {
-                font-family: "Special Elite", Georgia, serif;
-                color: #6f2dbd;
-            }
-            .plyr {
-                --plyr-color-main: #b266ff;
-                border-radius: 6px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            }
-            .audio-playlist {
-                list-style: none;
-                margin: 1.25em 0 0;
-                padding: 0;
-                border: 1px solid rgba(178, 102, 255, 0.4);
-                border-radius: 4px;
-                overflow: hidden;
-                background: rgba(255, 255, 255, 0.6);
-            }
-            .audio-playlist li {
-                margin: 0;
-            }
-            .audio-playlist button {
-                display: flex;
-                width: 100%;
-                align-items: center;
-                gap: 12px;
-                padding: 10px 16px;
-                background: transparent;
-                border: none;
-                border-bottom: 1px solid rgba(178, 102, 255, 0.2);
-                font-family: "Special Elite", Georgia, serif;
-                font-size: 15px;
-                color: #1a1a1a;
-                text-align: left;
-                cursor: pointer;
-                transition: background-color 0.15s ease, color 0.15s ease;
-            }
-            .audio-playlist li:last-child button {
-                border-bottom: none;
-            }
-            .audio-playlist button:hover,
-            .audio-playlist button:focus {
-                background-color: rgba(178, 102, 255, 0.12);
-                color: #6f2dbd;
-                outline: none;
-            }
-            .audio-playlist button[aria-current="true"] {
-                background-color: rgba(178, 102, 255, 0.2);
-                color: #6f2dbd;
-                font-weight: bold;
-            }
-            .audio-playlist .track-number {
-                display: inline-block;
-                min-width: 2.25em;
-                color: #b266ff;
-                font-weight: bold;
-            }
-            .audio-playlist .track-title {
-                flex: 1;
-            }
-        </style>
         <script src="header.js" defer></script>
         <script src="menu.js" defer></script>
         <script src="footer.js" defer></script>
         <script src="breadcrumbs.js" defer></script>
+        <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
+        <script src="audio-playlist.js" defer></script>
     </head>
     <body>
         <site-header></site-header>
@@ -96,161 +33,20 @@
                     <h1>Κατά Ματθαίον Ευαγγέλιον</h1>
                     <p>Το κατά Ματθαίον Ευαγγέλιον είναι το πρώτο από τα τέσσερα Ευαγγέλια της Καινής Διαθήκης. Γράφτηκε από τον Άγιο Απόστολο και Ευαγγελιστή Ματθαίο και διηγείται τη γέννηση, τη διδασκαλία, τα θαύματα, το πάθος και την Ανάσταση του Κυρίου ημών Ιησού Χριστού.</p>
 
-                    <section class="audio-section" aria-label="Ηχογραφημένη ανάγνωση">
-                        <audio id="matthaion-player" controls preload="none">
-                            <source
-                                src="audio/KainiDiathiki/MatthaionEvaggelio/01%20Track%2001_db5e95f0-3d85-4f1b-8310-cbc34c3908ff.mp3"
-                                type="audio/mpeg"
-                            />
-                            Ο φυλλομετρητής σας δεν υποστηρίζει την αναπαραγωγή ήχου.
-                        </audio>
-                        <ol class="audio-playlist" id="matthaion-playlist">
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/01%20Track%2001_db5e95f0-3d85-4f1b-8310-cbc34c3908ff.mp3"
-                                    aria-current="true"
-                                >
-                                    <span class="track-number">1.</span>
-                                    <span class="track-title">Κεφάλαιο 1</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/02%20Track%2002_2d9ba3b3-2fd0-4ac4-b930-6952a6220aea.mp3"
-                                >
-                                    <span class="track-number">2.</span>
-                                    <span class="track-title">Κεφάλαιο 2</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/03%20Track%2003_000e9261-2b51-4c38-9f4c-01cf579f71c8.mp3"
-                                >
-                                    <span class="track-number">3.</span>
-                                    <span class="track-title">Κεφάλαιο 3</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/04%20Track%2004_dd695af9-330e-422c-8af2-8ab9446030ab.mp3"
-                                >
-                                    <span class="track-number">4.</span>
-                                    <span class="track-title">Κεφάλαιο 4</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/05%20Track%2005_a2cf553f-3ae3-4f2a-8231-99cb3cd5e657.mp3"
-                                >
-                                    <span class="track-number">5.</span>
-                                    <span class="track-title">Κεφάλαιο 5</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/06%20Track%2006_532a838d-c2e4-40a6-9052-a45f486f7927.mp3"
-                                >
-                                    <span class="track-number">6.</span>
-                                    <span class="track-title">Κεφάλαιο 6</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/07%20Track%2007_fe2b2e1c-46c6-4c89-bed2-93fe55429217.mp3"
-                                >
-                                    <span class="track-number">7.</span>
-                                    <span class="track-title">Κεφάλαιο 7</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/08%20Track%2008_59a1ec7c-0177-4d16-8d8e-3618030e610c.mp3"
-                                >
-                                    <span class="track-number">8.</span>
-                                    <span class="track-title">Κεφάλαιο 8</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    data-src="audio/KainiDiathiki/MatthaionEvaggelio/09%20Track%2009_0edf4d02-71cd-4b8e-8452-b62f09b07cc2.mp3"
-                                >
-                                    <span class="track-number">9.</span>
-                                    <span class="track-title">Κεφάλαιο 9</span>
-                                </button>
-                            </li>
-                        </ol>
-                    </section>
+                    <audio-playlist base="audio/KainiDiathiki/MatthaionEvaggelio/" aria-label="Ηχογραφημένη ανάγνωση">
+                        01 Track 01_db5e95f0-3d85-4f1b-8310-cbc34c3908ff.mp3 | Κεφάλαιο 1
+                        02 Track 02_2d9ba3b3-2fd0-4ac4-b930-6952a6220aea.mp3 | Κεφάλαιο 2
+                        03 Track 03_000e9261-2b51-4c38-9f4c-01cf579f71c8.mp3 | Κεφάλαιο 3
+                        04 Track 04_dd695af9-330e-422c-8af2-8ab9446030ab.mp3 | Κεφάλαιο 4
+                        05 Track 05_a2cf553f-3ae3-4f2a-8231-99cb3cd5e657.mp3 | Κεφάλαιο 5
+                        06 Track 06_532a838d-c2e4-40a6-9052-a45f486f7927.mp3 | Κεφάλαιο 6
+                        07 Track 07_fe2b2e1c-46c6-4c89-bed2-93fe55429217.mp3 | Κεφάλαιο 7
+                        08 Track 08_59a1ec7c-0177-4d16-8d8e-3618030e610c.mp3 | Κεφάλαιο 8
+                        09 Track 09_0edf4d02-71cd-4b8e-8452-b62f09b07cc2.mp3 | Κεφάλαιο 9
+                    </audio-playlist>
                 </div>
             </div>
         </main>
         <site-footer></site-footer>
-        <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-        <script>
-            (function () {
-                var audioEl = document.getElementById("matthaion-player");
-                var playlist = document.getElementById("matthaion-playlist");
-                if (!audioEl || !playlist || typeof Plyr === "undefined") return;
-
-                var player = new Plyr(audioEl, {
-                    controls: [
-                        "play",
-                        "progress",
-                        "current-time",
-                        "duration",
-                        "mute",
-                        "volume",
-                        "settings",
-                    ],
-                    settings: ["speed"],
-                    speed: { selected: 1, options: [0.75, 1, 1.25, 1.5, 1.75, 2] },
-                    i18n: {
-                        play: "Αναπαραγωγή",
-                        pause: "Παύση",
-                        mute: "Σίγαση",
-                        unmute: "Άρση σίγασης",
-                        volume: "Ένταση",
-                        settings: "Ρυθμίσεις",
-                        speed: "Ταχύτητα",
-                        normal: "Κανονική",
-                    },
-                });
-
-                var buttons = playlist.querySelectorAll("button[data-src]");
-                buttons.forEach(function (btn) {
-                    btn.addEventListener("click", function () {
-                        var src = btn.getAttribute("data-src");
-                        buttons.forEach(function (b) {
-                            b.removeAttribute("aria-current");
-                        });
-                        btn.setAttribute("aria-current", "true");
-                        player.source = {
-                            type: "audio",
-                            sources: [{ src: src, type: "audio/mpeg" }],
-                        };
-                        player.play();
-                    });
-                });
-
-                player.on("ended", function () {
-                    var current = playlist.querySelector(
-                        'button[aria-current="true"]'
-                    );
-                    if (!current) return;
-                    var next = current.parentElement.nextElementSibling;
-                    if (!next) return;
-                    var nextBtn = next.querySelector("button[data-src]");
-                    if (nextBtn) nextBtn.click();
-                });
-            })();
-        </script>
     </body>
 </html>

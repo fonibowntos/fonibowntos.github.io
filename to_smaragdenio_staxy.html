@@ -12,75 +12,12 @@
         />
         <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
         <link rel="stylesheet" href="styles.css" />
-        <style>
-            .audio-section {
-                margin-top: 2em;
-            }
-            .audio-section h2 {
-                font-family: "Special Elite", Georgia, serif;
-                color: #6f2dbd;
-            }
-            .plyr {
-                --plyr-color-main: #b266ff;
-                border-radius: 6px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            }
-            .audio-playlist {
-                list-style: none;
-                margin: 1.25em 0 0;
-                padding: 0;
-                border: 1px solid rgba(178, 102, 255, 0.4);
-                border-radius: 4px;
-                overflow: hidden;
-                background: rgba(255, 255, 255, 0.6);
-            }
-            .audio-playlist li {
-                margin: 0;
-            }
-            .audio-playlist button {
-                display: flex;
-                width: 100%;
-                align-items: center;
-                gap: 12px;
-                padding: 10px 16px;
-                background: transparent;
-                border: none;
-                border-bottom: 1px solid rgba(178, 102, 255, 0.2);
-                font-family: "Special Elite", Georgia, serif;
-                font-size: 15px;
-                color: #1a1a1a;
-                text-align: left;
-                cursor: pointer;
-                transition: background-color 0.15s ease, color 0.15s ease;
-            }
-            .audio-playlist li:last-child button {
-                border-bottom: none;
-            }
-            .audio-playlist button:hover,
-            .audio-playlist button:focus {
-                background-color: rgba(178, 102, 255, 0.12);
-                color: #6f2dbd;
-                outline: none;
-            }
-            .audio-playlist button[aria-current="true"] {
-                background-color: rgba(178, 102, 255, 0.2);
-                color: #6f2dbd;
-                font-weight: bold;
-            }
-            .audio-playlist .track-number {
-                display: inline-block;
-                min-width: 2.25em;
-                color: #b266ff;
-                font-weight: bold;
-            }
-            .audio-playlist .track-title {
-                flex: 1;
-            }
-        </style>
         <script src="header.js" defer></script>
         <script src="menu.js" defer></script>
         <script src="footer.js" defer></script>
         <script src="breadcrumbs.js" defer></script>
+        <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
+        <script src="audio-playlist.js" defer></script>
     </head>
     <body>
         <site-header></site-header>
@@ -96,107 +33,23 @@
                     <h1>Το σμαραγδένιο στάχυ</h1>
                     <p>Ένα ορθόδοξο παιδικό παραμύθι αφηγημένο από τη μοναχή Αγαθονίκη. Επιλέξτε ένα μέρος από τη λίστα για να ακούσετε την ηχογράφηση.</p>
 
-                    <section class="audio-section" aria-label="Ηχογραφημένη αφήγηση">
-                        <audio id="staxy-player" controls preload="none">
-                            Ο φυλλομετρητής σας δεν υποστηρίζει την αναπαραγωγή ήχου.
-                        </audio>
-                        <ol class="audio-playlist" id="staxy-playlist"></ol>
-                    </section>
+                    <audio-playlist base="audio/ToSmaragdenioStaxy/" aria-label="Ηχογραφημένη αφήγηση">
+                        01 - Nun Agathoniki - Το σμαραγδένιο στάχυ 1.mp3
+                        02 - Nun Agathoniki - Το σμαραγδένιο στάχυ 2.mp3
+                        03 - Nun Agathoniki - Το σμαραγδένιο στάχυ 3.mp3
+                        04 - Nun Agathoniki - Το σμαραγδένιο στάχυ 4.mp3
+                        05 - Nun Agathoniki - Το σμαραγδένιο στάχυ 5.mp3
+                        06 - Nun Agathoniki - Το σμαραγδένιο στάχυ 6.mp3
+                        07 - Nun Agathoniki - Το σμαραγδένιο στάχυ 7.mp3
+                        08 - Nun Agathoniki - Το σμαραγδένιο στάχυ 8.mp3
+                        09 - Nun Agathoniki - Το σμαραγδένιο στάχυ 9.mp3
+                        10 - Nun Agathoniki - Το σμαραγδένιο στάχυ 10.mp3
+                        11 - Nun Agathoniki - Το σμαραγδένιο στάχυ 11.mp3
+                        12 - Nun Agathoniki - Το σμαραγδένιο στάχυ 12.mp3
+                    </audio-playlist>
                 </div>
             </div>
         </main>
         <site-footer></site-footer>
-        <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-        <script>
-            (function () {
-                var audioEl = document.getElementById("staxy-player");
-                var playlist = document.getElementById("staxy-playlist");
-                if (!audioEl || !playlist || typeof Plyr === "undefined") return;
-
-                var BASE = "audio/ToSmaragdenioStaxy/";
-                for (var i = 1; i <= 12; i++) {
-                    var num = (i < 10 ? "0" : "") + i;
-                    var file =
-                        num +
-                        " - Nun Agathoniki - Το σμαραγδένιο στάχυ " +
-                        i +
-                        ".mp3";
-                    var li = document.createElement("li");
-                    var btn = document.createElement("button");
-                    btn.type = "button";
-                    btn.setAttribute("data-src", BASE + encodeURIComponent(file));
-                    if (i === 1) btn.setAttribute("aria-current", "true");
-                    var num1 = document.createElement("span");
-                    num1.className = "track-number";
-                    num1.textContent = i + ".";
-                    var title = document.createElement("span");
-                    title.className = "track-title";
-                    title.textContent = "Μέρος " + i;
-                    btn.appendChild(num1);
-                    btn.appendChild(title);
-                    li.appendChild(btn);
-                    playlist.appendChild(li);
-                }
-
-                var firstBtn = playlist.querySelector("button[data-src]");
-                if (firstBtn) {
-                    var srcEl = document.createElement("source");
-                    srcEl.src = firstBtn.getAttribute("data-src");
-                    srcEl.type = "audio/mpeg";
-                    audioEl.appendChild(srcEl);
-                }
-
-                var player = new Plyr(audioEl, {
-                    controls: [
-                        "play",
-                        "progress",
-                        "current-time",
-                        "duration",
-                        "mute",
-                        "volume",
-                        "settings",
-                    ],
-                    settings: ["speed"],
-                    speed: { selected: 1, options: [0.75, 1, 1.25, 1.5, 1.75, 2] },
-                    i18n: {
-                        play: "Αναπαραγωγή",
-                        pause: "Παύση",
-                        mute: "Σίγαση",
-                        unmute: "Άρση σίγασης",
-                        volume: "Ένταση",
-                        settings: "Ρυθμίσεις",
-                        speed: "Ταχύτητα",
-                        normal: "Κανονική",
-                    },
-                });
-
-                var buttons = playlist.querySelectorAll("button[data-src]");
-                buttons.forEach(function (btn) {
-                    btn.addEventListener("click", function () {
-                        var src = btn.getAttribute("data-src");
-                        buttons.forEach(function (b) {
-                            b.removeAttribute("aria-current");
-                        });
-                        btn.setAttribute("aria-current", "true");
-                        player.source = {
-                            type: "audio",
-                            sources: [{ src: src, type: "audio/mpeg" }],
-                        };
-                        player.play();
-                    });
-                });
-
-                player.on("ended", function () {
-                    var current = playlist.querySelector(
-                        'button[aria-current="true"]'
-                    );
-                    if (!current) return;
-                    var next = current.parentElement.nextElementSibling;
-                    if (!next) return;
-                    var nextBtn = next.querySelector("button[data-src]");
-                    if (nextBtn) nextBtn.click();
-                });
-            })();
-        </script>
     </body>
 </html>
