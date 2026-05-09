@@ -97,13 +97,23 @@
                     </p>
                     <form
                         class="contact-form"
-                        action="https://formsubmit.co/a@agathoniki.com"
+                        action="https://api.staticforms.dev/submit"
                         method="POST"
                     >
-                        <input type="hidden" name="_template" value="box" />
+                        <input
+                            type="hidden"
+                            name="apiKey"
+                            value="sf_32d13233d450c85fe6c9b46b"
+                        />
+                        <input
+                            type="hidden"
+                            name="subject"
+                            value="Επικοινωνία από agathoniki.com: {{theme}}"
+                        />
+                        <input type="hidden" name="replyTo" value="{{email}}" />
                         <input
                             type="text"
-                            name="_honey"
+                            name="honeypot"
                             style="display: none"
                             tabindex="-1"
                             autocomplete="off"
@@ -128,7 +138,7 @@
                         </label>
                         <label>
                             <span>Θέμα</span>
-                            <input type="text" name="_subject" required />
+                            <input type="text" name="theme" required />
                         </label>
                         <label>
                             <span>Μήνυμα</span>
