@@ -234,6 +234,81 @@ main {
     max-width: 100%;
     height: auto;
 }
+.book-hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: flex-start;
+    margin: 0 0 8px;
+}
+.book-cover {
+    flex: 0 0 auto;
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    background: #fff;
+}
+.book-hero-text {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+.book-hero-text h1 {
+    font-family: "Special Elite", Georgia, serif;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    color: #b266ff;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+    margin: 0 0 0.2em;
+}
+.book-byline {
+    font-family: "Special Elite", Georgia, serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #555;
+    margin: 0 0 1em;
+    letter-spacing: 0.02em;
+}
+.book-lead {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #2a2a2a;
+    margin: 0;
+}
+.book-lead::first-letter {
+    font-family: "Special Elite", Georgia, serif;
+    font-size: 2.6em;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 8px 0 0;
+    color: #b266ff;
+}
+.book-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+    color: #b266ff;
+    font-size: 0.9rem;
+    letter-spacing: 0.6em;
+    text-indent: 0.6em;
+    justify-content: center;
+}
+.book-divider::before,
+.book-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(178, 102, 255, 0.5),
+        transparent
+    );
+}
 .page-content p {
     margin: 0 0 1em;
     text-align: justify;
