@@ -6,13 +6,9 @@
     <div class="container">
         <nav aria-label="Δευτερεύον μενού">
             <ul class="footer-nav">
-                <li>
-                    <a href="paidika_paramythia.html">Παιδικά Παραμύθια</a>
-                </li>
-                <li>
-                    <a href="paidika_tragoudia.html">Παιδικά Τραγούδια</a>
-                </li>
                 <li><a href="vioi_agion.html">Βίοι Αγίων</a></li>
+                <li><a href="paidika_paramythia.html">Παραμύθια</a></li>
+                <li><a href="paidika_tragoudia.html">Τραγούδια</a></li>
                 <li><a href="palaia_diathiki.html">Παλαιά Διαθήκη</a></li>
                 <li><a href="kaini_diathiki.html">Καινή Διαθήκη</a></li>
                 <li>
@@ -21,6 +17,7 @@
                 <li>
                     <a href="apokalypseis_erevnes.html">Αποκαλύψεις / Έρευνες</a>
                 </li>
+                <li><a href="epikoinonia.html">Επικοινωνία</a></li>
             </ul>
         </nav>
         <p>Agathoniki.com © 2026</p>
