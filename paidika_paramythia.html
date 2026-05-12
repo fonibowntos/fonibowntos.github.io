@@ -12,37 +12,49 @@
         />
         <link rel="stylesheet" href="styles.css" />
         <style>
-            .book-list {
+            .book-gallery {
                 list-style: none;
-                margin: 1em 0 0;
-                padding: 0;
-            }
-            .book-list li {
                 margin: 0;
-                border-bottom: 1px solid rgba(178, 102, 255, 0.25);
+                padding: 0;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 20px;
             }
-            .book-list li:last-child {
-                border-bottom: none;
-            }
-            .book-list a {
-                display: block;
-                padding: 14px 16px;
-                color: #1a1a1a;
+            .book-gallery a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
                 text-decoration: none;
-                font-family: "Special Elite", Georgia, serif;
-                font-size: 16px;
-                transition: background-color 0.15s ease, color 0.15s ease;
+                color: #1a1a1a;
+                border-radius: 4px;
+                padding: 12px;
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease,
+                    border-color 0.2s ease;
             }
-            .book-list a:hover,
-            .book-list a:focus {
-                background-color: rgba(178, 102, 255, 0.12);
-                color: #6f2dbd;
+            .book-gallery a:hover,
+            .book-gallery a:focus {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+                border-color: #b266ff;
                 outline: none;
             }
-            .book-list a::after {
-                content: " \203A";
-                color: #b266ff;
-                margin-left: 6px;
+            .book-gallery img {
+                width: 100%;
+                height: auto;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+                background: #fff;
+                display: block;
+            }
+            .book-gallery .book-title {
+                margin-top: 10px;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 14px;
+                line-height: 1.3;
+                color: #000;
             }
         </style>
         <script src="header.js" defer></script>
@@ -64,15 +76,42 @@
                     <h1>Παιδικά Παραμύθια</h1>
                     <p>Καλώς ήλθατε στη συλλογή ορθοδόξων παιδικών παραμυθιών. Διηγήσεις εμπνευσμένες από τους βίους των Αγίων και τη ζωή της Εκκλησίας μας, αφηγημένες με τρόπο απλό και εύληπτο για τα παιδιά.</p>
                     <h2>Διαθέσιμα παραμύθια</h2>
-                    <ul class="book-list">
+                    <ul class="book-gallery">
                         <li>
-                            <a href="to_smaragdenio_staxy.html">Το σμαραγδένιο στάχυ</a>
+                            <a href="to_smaragdenio_staxy.html">
+                                <img
+                                    src="images/smaragdenio_staxi_cover.jpg"
+                                    alt="Εξώφυλλο: Το σμαραγδένιο στάχυ"
+                                    loading="lazy"
+                                />
+                                <span class="book-title"
+                                    >Το σμαραγδένιο στάχυ</span
+                                >
+                            </a>
                         </li>
                         <li>
-                            <a href="o_likos_o_bibis.html">Ο λύκος ο Μπιμπίς</a>
+                            <a href="o_likos_o_bibis.html">
+                                <img
+                                    src="images/bibis_cover.jpg"
+                                    alt="Εξώφυλλο: Ο λύκος ο Μπιμπίς"
+                                    loading="lazy"
+                                />
+                                <span class="book-title"
+                                    >Ο λύκος ο Μπιμπίς</span
+                                >
+                            </a>
                         </li>
                         <li>
-                            <a href="pes_mou_mama_kati_gia_ta_xristougenna.html">Πες μου μαμά κάτι για τα Χριστούγεννα</a>
+                            <a href="pes_mou_mama_kati_gia_ta_xristougenna.html">
+                                <img
+                                    src="images/pes_mou_mama_kati_gia_ta_xristougenna.jpg"
+                                    alt="Εξώφυλλο: Πες μου μαμά κάτι για τα Χριστούγεννα"
+                                    loading="lazy"
+                                />
+                                <span class="book-title"
+                                    >Πες μου μαμά κάτι για τα Χριστούγεννα</span
+                                >
+                            </a>
                         </li>
                     </ul>
                 </div>
