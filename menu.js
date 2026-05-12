@@ -46,15 +46,19 @@
                 </ul>
             </li>
             <li class="cross" aria-hidden="true"></li>
-            <li>
-                <a class="menu-link" href="palaia_diathiki.html">Παλαιά Διαθήκη</a>
-            </li>
-            <li class="cross" aria-hidden="true"></li>
             <li class="has-submenu">
-                <a class="menu-link" href="kaini_diathiki.html">Καινή Διαθήκη</a>
+                <a class="menu-link" href="#agia-grafi">Αγία Γραφή</a>
                 <ul class="submenu">
                     <li>
-                        <a class="menu-link" href="kata_matthaion.html">Κατά Ματθαίον Ευαγγέλιον</a>
+                        <a class="menu-link" href="palaia_diathiki.html">Παλαιά Διαθήκη</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a class="menu-link" href="kaini_diathiki.html">Καινή Διαθήκη</a>
+                        <ul class="submenu">
+                            <li>
+                                <a class="menu-link" href="kata_matthaion.html">Κατά Ματθαίον Ευαγγέλιον</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
