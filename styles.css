@@ -209,6 +209,17 @@ h3 {
 .submenu a.menu-link[aria-current="page"] {
     border-bottom-color: transparent;
 }
+.submenu .has-submenu {
+    position: relative;
+}
+.submenu .has-submenu > .menu-link::after {
+    content: " ▸";
+}
+.submenu .submenu {
+    top: 0;
+    left: 100%;
+    border-top: 1px solid #cd8602;
+}
 
 main {
     padding: 48px 0;

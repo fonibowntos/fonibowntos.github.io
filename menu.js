@@ -12,11 +12,33 @@
             <li class="has-submenu">
                 <a class="menu-link" href="#paidika">Παιδικά</a>
                 <ul class="submenu">
-                    <li>
+                    <li class="has-submenu">
                         <a class="menu-link" href="vioi_agion.html">Βίοι Αγίων</a>
+                        <ul class="submenu">
+                            <li>
+                                <a class="menu-link" href="agios_panteleimonas.html">Ο Άγιος Παντελεήμονας ο Ιατρός</a>
+                            </li>
+                            <li>
+                                <a class="menu-link" href="agia_matrona.html">Η Αγία Ματρώνα η Ρωσίδα</a>
+                            </li>
+                            <li>
+                                <a class="menu-link" href="agios_symeon_agios_ioannis.html">Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος Ιωάννης</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
+                    <li class="has-submenu">
                         <a class="menu-link" href="paidika_paramythia.html">Παραμύθια</a>
+                        <ul class="submenu">
+                            <li>
+                                <a class="menu-link" href="pes_mou_mama_kati_gia_ta_xristougenna.html">Πες μου μαμά κάτι για τα Χριστούγεννα</a>
+                            </li>
+                            <li>
+                                <a class="menu-link" href="to_smaragdenio_staxy.html">Το σμαραγδένιο στάχυ</a>
+                            </li>
+                            <li>
+                                <a class="menu-link" href="o_likos_o_bibis.html">Ο λύκος ο Μπιμπίς</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a class="menu-link" href="paidika_tragoudia.html">Τραγούδια</a>
@@ -93,12 +115,13 @@
                 const href = link.getAttribute("href") || "";
                 if (href === currentPage) {
                     link.setAttribute("aria-current", "page");
-                    const submenu = link.closest(".submenu");
-                    if (submenu) {
+                    let submenu = link.closest(".submenu");
+                    while (submenu) {
                         const parentItem = submenu.parentElement;
                         if (parentItem && parentItem.classList.contains("has-submenu")) {
                             parentItem.classList.add("has-active-descendant");
                         }
+                        submenu = parentItem ? parentItem.closest(".submenu") : null;
                     }
                 }
             });
