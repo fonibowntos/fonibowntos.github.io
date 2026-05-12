@@ -367,12 +367,29 @@ main {
 .footer-nav {
     margin: 0 0 16px;
     padding: 0 0 16px;
-    list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px 32px;
+    gap: 16px 40px;
     border-bottom: 1px solid #000;
+    text-align: left;
+}
+.footer-nav-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.footer-nav-heading {
+    margin: 0 0 6px;
+    font-family: "Special Elite", Georgia, serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    color: #b266ff;
+    text-transform: uppercase;
 }
 .footer-nav a {
     color: #000;
