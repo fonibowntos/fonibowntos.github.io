@@ -38,6 +38,9 @@
                             <li>
                                 <a class="menu-link" href="o_likos_o_bibis.html">Ο λύκος ο Μπιμπίς</a>
                             </li>
+                            <li>
+                                <a class="menu-link" href="ta_thavmata_tou_christou.html">Τα Θαύματα του Χριστού</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
