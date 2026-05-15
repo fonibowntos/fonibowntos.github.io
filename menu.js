@@ -27,19 +27,24 @@
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a class="menu-link" href="paidika_paramythia.html">Παραμύθια</a>
+                        <a class="menu-link" href="vioi_agion_audio.html">Βίοι Αγίων (Audio)</a>
                         <ul class="submenu">
                             <li>
                                 <a class="menu-link" href="pes_mou_mama_kati_gia_ta_xristougenna.html">Πες μου μαμά κάτι για τα Χριστούγεννα</a>
                             </li>
                             <li>
+                                <a class="menu-link" href="ta_thavmata_tou_christou.html">Τα Θαύματα του Χριστού</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a class="menu-link" href="paidika_paramythia.html">Παραμύθια</a>
+                        <ul class="submenu">
+                            <li>
                                 <a class="menu-link" href="to_smaragdenio_staxy.html">Το σμαραγδένιο στάχυ</a>
                             </li>
                             <li>
                                 <a class="menu-link" href="o_likos_o_bibis.html">Ο λύκος ο Μπιμπίς</a>
-                            </li>
-                            <li>
-                                <a class="menu-link" href="ta_thavmata_tou_christou.html">Τα Θαύματα του Χριστού</a>
                             </li>
                         </ul>
                     </li>
