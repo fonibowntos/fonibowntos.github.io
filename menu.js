@@ -4,7 +4,12 @@
     const MENU_HTML = `
 <nav class="site-nav" aria-label="Κύριο μενού">
     <div class="container">
-        <ul class="menu">
+        <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Άνοιγμα μενού">
+            <span class="menu-toggle-bar" aria-hidden="true"></span>
+            <span class="menu-toggle-bar" aria-hidden="true"></span>
+            <span class="menu-toggle-bar" aria-hidden="true"></span>
+        </button>
+        <ul class="menu" id="primary-menu">
             <li>
                 <a class="menu-link" href="index.html">Αρχική</a>
             </li>
@@ -135,6 +140,53 @@
                         }
                         submenu = parentItem ? parentItem.closest(".submenu") : null;
                     }
+                }
+            });
+
+            // Mobile hamburger: toggles the whole nav open/closed.
+            const nav = this.querySelector(".site-nav");
+            const toggle = this.querySelector(".menu-toggle");
+            if (nav && toggle) {
+                toggle.addEventListener("click", () => {
+                    const open = nav.classList.toggle("nav-open");
+                    toggle.setAttribute("aria-expanded", String(open));
+                    toggle.setAttribute(
+                        "aria-label",
+                        open ? "Κλείσιμο μενού" : "Άνοιγμα μενού",
+                    );
+                });
+            }
+
+            // Hover can't open submenus on touch devices. Add a disclosure
+            // button next to every parent link; on mobile it expands the
+            // submenu in place (CSS hides the button on desktop, where hover
+            // still works). The branch leading to the current page starts
+            // expanded so visitors see where they are.
+            this.querySelectorAll(".has-submenu").forEach((item) => {
+                const link = item.querySelector(":scope > .menu-link");
+                const startOpen =
+                    item.classList.contains("has-active-descendant");
+                if (startOpen) item.classList.add("submenu-open");
+
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "submenu-toggle";
+                btn.setAttribute("aria-expanded", String(startOpen));
+                const label = link ? link.textContent.trim() : "υπομενού";
+                btn.setAttribute("aria-label", "Εμφάνιση υπομενού: " + label);
+                btn.innerHTML =
+                    '<span class="submenu-caret" aria-hidden="true">▾</span>';
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isOpen = item.classList.toggle("submenu-open");
+                    btn.setAttribute("aria-expanded", String(isOpen));
+                });
+
+                if (link) {
+                    link.insertAdjacentElement("afterend", btn);
+                } else {
+                    item.insertBefore(btn, item.firstChild);
                 }
             });
         }

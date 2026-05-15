@@ -434,3 +434,124 @@ main {
     color: #555;
     font-style: italic;
 }
+
+/* --- Mobile navigation ---
+   Desktop keeps the horizontal hover menu. These controls are injected by
+   menu.js and stay hidden until the breakpoint below. */
+.menu-toggle,
+.submenu-toggle {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .site-nav .container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        align-self: flex-start;
+        width: 46px;
+        height: 42px;
+        margin: 4px 0;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.4);
+        border: 1px solid #b266ff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .menu-toggle-bar {
+        display: block;
+        width: 24px;
+        height: 2px;
+        margin: 0 auto;
+        background: #b266ff;
+        box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+    }
+    .menu {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding-bottom: 6px;
+    }
+    .site-nav.nav-open .menu {
+        display: flex;
+    }
+    .menu > li {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+    .cross {
+        display: none;
+    }
+    .menu a.menu-link {
+        white-space: normal;
+        padding: 13px 10px;
+        border-bottom: none;
+        border-top: 1px solid rgba(178, 102, 255, 0.25);
+    }
+    .has-submenu {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+    .has-submenu > .menu-link {
+        flex: 1 1 0;
+    }
+    .has-submenu > .menu-link::after,
+    .submenu .has-submenu > .menu-link::after {
+        content: none;
+    }
+    .submenu-toggle {
+        display: block;
+        flex: 0 0 auto;
+        width: 52px;
+        background: transparent;
+        border: none;
+        border-top: 1px solid rgba(178, 102, 255, 0.25);
+        color: #b266ff;
+        font-size: 16px;
+        line-height: 1;
+        cursor: pointer;
+    }
+    .submenu-caret {
+        display: inline-block;
+        transition: transform 0.2s ease;
+    }
+    .has-submenu.submenu-open > .submenu-toggle .submenu-caret {
+        transform: rotate(180deg);
+    }
+    .submenu,
+    .submenu .submenu {
+        position: static;
+        top: auto;
+        left: auto;
+        min-width: 0;
+        width: 100%;
+        flex-basis: 100%;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        background: rgba(255, 255, 255, 0.45);
+    }
+    .has-submenu:hover > .submenu,
+    .has-submenu:focus-within > .submenu {
+        display: none;
+    }
+    .has-submenu.submenu-open > .submenu {
+        display: block;
+    }
+    .submenu a.menu-link {
+        padding-left: 26px;
+    }
+    .submenu .submenu a.menu-link {
+        padding-left: 42px;
+    }
+}
