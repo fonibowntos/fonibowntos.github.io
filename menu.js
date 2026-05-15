@@ -27,7 +27,7 @@
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a class="menu-link" href="vioi_agion_audio.html">Βίοι Αγίων (Audio)</a>
+                        <a class="menu-link" href="vioi_agion_audio.html">Βίοι Αγίων (Audio) 🎧</a>
                         <ul class="submenu">
                             <li>
                                 <a class="menu-link" href="pes_mou_mama_kati_gia_ta_xristougenna.html">Πες μου μαμά κάτι για τα Χριστούγεννα</a>
