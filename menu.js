@@ -162,6 +162,8 @@
             // submenu in place (CSS hides the button on desktop, where hover
             // still works). The branch leading to the current page starts
             // expanded so visitors see where they are.
+            const mobileQuery = window.matchMedia("(max-width: 900px)");
+
             this.querySelectorAll(".has-submenu").forEach((item) => {
                 const link = item.querySelector(":scope > .menu-link");
                 const startOpen =
@@ -176,12 +178,33 @@
                 btn.setAttribute("aria-label", "Εμφάνιση υπομενού: " + label);
                 btn.innerHTML =
                     '<span class="submenu-caret" aria-hidden="true">▾</span>';
+
+                // Keep the caret button and the parent label in sync: both
+                // drive the same open state and the same aria-expanded.
+                function toggleSubmenu() {
+                    const isOpen = item.classList.toggle("submenu-open");
+                    btn.setAttribute("aria-expanded", String(isOpen));
+                }
+
                 btn.addEventListener("click", (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    const isOpen = item.classList.toggle("submenu-open");
-                    btn.setAttribute("aria-expanded", String(isOpen));
+                    toggleSubmenu();
                 });
+
+                // On mobile, parents whose link is a placeholder anchor
+                // (e.g. "Παιδικά" -> #paidika, "Αγία Γραφή" -> #agia-grafi)
+                // go nowhere, so tapping the label itself should open the
+                // submenu. Real page links (Βίοι Αγίων, Καινή Διαθήκη, ...)
+                // keep navigating and still expand via the caret.
+                if (link && (link.getAttribute("href") || "").charAt(0) === "#") {
+                    link.addEventListener("click", (e) => {
+                        if (mobileQuery.matches) {
+                            e.preventDefault();
+                            toggleSubmenu();
+                        }
+                    });
+                }
 
                 if (link) {
                     link.insertAdjacentElement("afterend", btn);
