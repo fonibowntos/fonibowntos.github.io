@@ -56,8 +56,16 @@
                     <li>
                         <a class="menu-link" href="paidika_tragoudia.html">Τραγούδια</a>
                     </li>
-                    <li>
-                        <a class="menu-link" href="drastiriotites.html">Δραστηριότητες - Quiz</a>
+                    <li class="has-submenu">
+                        <a class="menu-link" href="#drastiriotites">Δραστηριότητες - Quiz</a>
+                        <ul class="submenu">
+                            <li>
+                                <a class="menu-link" href="drastiriotites.html">Ο Άγιος Παντελεήμονας ο Ιατρός - Βιβλίο Δραστηριοτήτων</a>
+                            </li>
+                            <li>
+                                <a class="menu-link" href="agia_matrona_quiz.html">Αγία Ματρώνα Quiz</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>

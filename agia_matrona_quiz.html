@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="el">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Αγία Ματρώνα Quiz — agathoniki.com</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            /* Quiz — scoped under .quiz so it inherits the site palette
+               (purple #b266ff / gold #cd8602 / Special Elite) and never
+               leaks into the rest of the site. */
+            .quiz {
+                max-width: 640px;
+                margin: 24px auto 0;
+            }
+            .quiz-prog {
+                margin-bottom: 20px;
+            }
+            .quiz-prog-meta {
+                display: flex;
+                justify-content: space-between;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 14px;
+                color: #6b6b6b;
+                letter-spacing: 0.04em;
+                margin-bottom: 6px;
+            }
+            .quiz-prog-track {
+                height: 8px;
+                background: rgba(178, 102, 255, 0.18);
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                border-radius: 6px;
+                overflow: hidden;
+            }
+            .quiz-prog-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #b266ff, #cd8602);
+                transition: width 0.5s ease;
+            }
+
+            .quiz-card {
+                background: rgba(255, 255, 255, 0.6);
+                border: 1px solid rgba(178, 102, 255, 0.4);
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+                padding: 24px 22px;
+                margin-bottom: 14px;
+            }
+            .quiz-qnum {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 13px;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: #b266ff;
+                margin-bottom: 10px;
+            }
+            .quiz-qtxt {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #1a1a1a;
+                margin-bottom: 18px;
+            }
+
+            .quiz-opts {
+                display: flex;
+                flex-direction: column;
+                gap: 9px;
+            }
+            .quiz-opt {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+                text-align: left;
+                background: rgba(255, 255, 255, 0.55);
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                border-radius: 4px;
+                padding: 12px 14px;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 1rem;
+                line-height: 1.45;
+                color: #1a1a1a;
+                cursor: pointer;
+                transition:
+                    background 0.18s ease,
+                    border-color 0.18s ease,
+                    transform 0.18s ease;
+            }
+            .quiz-opt-letter {
+                flex: 0 0 auto;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 13px;
+                background: rgba(178, 102, 255, 0.18);
+                color: #7a3fc0;
+                transition:
+                    background 0.18s ease,
+                    color 0.18s ease;
+            }
+            .quiz-opt:hover:not(:disabled) {
+                border-color: #b266ff;
+                background: rgba(178, 102, 255, 0.1);
+                transform: translateX(3px);
+            }
+            .quiz-opt:hover:not(:disabled) .quiz-opt-letter {
+                background: #b266ff;
+                color: #fff;
+            }
+
+            .quiz-tf-row {
+                display: flex;
+                gap: 12px;
+            }
+            .quiz-tf-btn {
+                flex: 1;
+                padding: 12px 14px;
+                border-radius: 4px;
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                background: rgba(255, 255, 255, 0.55);
+                color: #1a1a1a;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.18s ease;
+            }
+            .quiz-tf-btn:hover:not(:disabled) {
+                background: #b266ff;
+                color: #fff;
+                border-color: #b266ff;
+            }
+
+            .quiz-opt.picked {
+                border-color: #b266ff;
+                background: rgba(178, 102, 255, 0.14);
+            }
+            .quiz-opt.picked .quiz-opt-letter {
+                background: #b266ff;
+                color: #fff;
+            }
+            .quiz-tf-btn.picked {
+                background: #b266ff;
+                color: #fff;
+                border-color: #b266ff;
+            }
+
+            .quiz-opt.correct-opt {
+                border-color: rgba(46, 125, 50, 0.55);
+                background: rgba(46, 125, 50, 0.12);
+            }
+            .quiz-opt.correct-opt .quiz-opt-letter {
+                background: #2e7d32;
+                color: #fff;
+            }
+            .quiz-opt.wrong-opt {
+                border-color: rgba(179, 38, 30, 0.5);
+                background: rgba(179, 38, 30, 0.1);
+                opacity: 0.75;
+            }
+            .quiz-tf-btn.correct-tf {
+                background: #2e7d32;
+                color: #fff;
+                border-color: #2e7d32;
+            }
+            .quiz-tf-btn.wrong-tf {
+                background: rgba(179, 38, 30, 0.1);
+                color: #b3261e;
+                border-color: rgba(179, 38, 30, 0.45);
+                opacity: 0.8;
+            }
+            .quiz-opt:disabled,
+            .quiz-tf-btn:disabled {
+                cursor: default;
+            }
+
+            .quiz-feedback {
+                margin-top: 14px;
+                border-radius: 4px;
+                padding: 14px 16px;
+                font-size: 0.98rem;
+                line-height: 1.6;
+                animation: quizPop 0.3s ease both;
+            }
+            .quiz-feedback.correct {
+                background: rgba(46, 125, 50, 0.1);
+                border: 1px solid rgba(46, 125, 50, 0.4);
+                color: #1f5b23;
+            }
+            .quiz-feedback.wrong {
+                background: rgba(179, 38, 30, 0.08);
+                border: 1px solid rgba(179, 38, 30, 0.35);
+                color: #8a1c16;
+            }
+            .quiz-feedback-icon {
+                margin-right: 6px;
+            }
+
+            .quiz-nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .quiz-btn {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 0.98rem;
+                letter-spacing: 0.03em;
+                padding: 11px 22px;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.18s ease;
+                border: 1px solid transparent;
+            }
+            .quiz-btn-sec {
+                background: transparent;
+                border-color: rgba(178, 102, 255, 0.5);
+                color: #6b6b6b;
+            }
+            .quiz-btn-sec:hover {
+                border-color: #b266ff;
+                color: #b266ff;
+            }
+            .quiz-btn-pri {
+                background: #b266ff;
+                color: #fff;
+                box-shadow: 0 2px 8px rgba(178, 102, 255, 0.35);
+            }
+            .quiz-btn-pri:hover {
+                background: #8a3fd1;
+            }
+            .quiz-btn-pri:disabled {
+                opacity: 0.35;
+                cursor: not-allowed;
+                box-shadow: none;
+            }
+
+            .quiz-result {
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .quiz-result-icon {
+                font-size: 42px;
+                color: #b266ff;
+                margin-bottom: 12px;
+            }
+            .quiz-result h2 {
+                font-family: "Special Elite", Georgia, serif;
+                color: #b266ff;
+                text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+                margin: 0 0 6px;
+            }
+            .quiz-result-score {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 46px;
+                color: #b266ff;
+                margin: 10px 0;
+            }
+            .quiz-stars {
+                font-size: 26px;
+                letter-spacing: 4px;
+                margin: 6px 0 16px;
+            }
+            .quiz-result-msg {
+                font-size: 1.05rem;
+                color: #1a1a1a;
+                margin-bottom: 20px;
+                line-height: 1.55;
+            }
+            .quiz-sc-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-bottom: 22px;
+                text-align: left;
+            }
+            .quiz-sc-item {
+                background: rgba(255, 255, 255, 0.55);
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                border-radius: 4px;
+                padding: 12px 14px;
+            }
+            .quiz-sc-item .num {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 22px;
+            }
+            .quiz-sc-item .lbl {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 12px;
+                color: #6b6b6b;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+            .quiz-result-sub {
+                font-style: italic;
+                color: #555;
+                margin-bottom: 20px;
+            }
+
+            @keyframes quizPop {
+                from {
+                    opacity: 0;
+                    transform: translateY(6px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes quizFade {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .quiz-anim {
+                animation: quizFade 0.35s ease both;
+            }
+            .quiz-hidden {
+                display: none !important;
+            }
+        </style>
+        <script src="header.js" defer></script>
+        <script src="menu.js" defer></script>
+        <script src="footer.js" defer></script>
+        <script src="breadcrumbs.js" defer></script>
+    </head>
+    <body>
+        <site-header></site-header>
+        <site-menu></site-menu>
+        <main class="container">
+            <site-breadcrumbs>
+                <li><a href="index.html">Αρχική</a></li>
+                <li>Παιδικά</li>
+                <li>Δραστηριότητες - Quiz</li>
+                <li aria-current="page">Αγία Ματρώνα Quiz</li>
+            </site-breadcrumbs>
+            <div class="page-content">
+                <div class="page-content-inner">
+                    <h1>Αγία Ματρώνα Quiz</h1>
+                    <p>
+                        Κουίζ κατανόησης του βιβλίου «Η Αγία Ματρώνα η
+                        Αόμματη». Είκοσι ερωτήσεις με άμεσο σχόλιο σε κάθε
+                        απάντηση. Καλή επιτυχία!
+                    </p>
+
+                    <div class="quiz">
+                        <div class="quiz-prog" id="quizProg">
+                            <div class="quiz-prog-meta">
+                                <span id="quizProgTxt">Ερώτηση 1 / 20</span>
+                                <span id="quizProgPct">5%</span>
+                            </div>
+                            <div class="quiz-prog-track">
+                                <div
+                                    class="quiz-prog-fill"
+                                    id="quizProgFill"
+                                    style="width: 5%"
+                                ></div>
+                            </div>
+                        </div>
+                        <div id="quizApp"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <site-footer></site-footer>
+
+        <script>
+            // Question types: 'mc' = multiple choice (one correct), 'tf' = true/false
+            const QS = [
+                {
+                    q: "1. Ο τίτλος του βιβλίου λέγεται «Ένα πουλί σε ξένο δάσος». Γιατί κατά τη γνώμη σας πήρε αυτό το όνομα;",
+                    type: "mc",
+                    opts: [
+                        "Γιατί άρεσαν στην αγία πολύ τα πουλιά.",
+                        "Γιατί είδε ένα λευκό πουλί στον ύπνο της η μητέρα της αγίας.",
+                        "Γιατί απαγορεύεται τα πουλιά να πηγαίνουν σε ξένο δάσος.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Η μητέρα της αγίας Ματρώνας είδε στο όνειρό της ένα ασυνήθιστο λευκό πουλί, τυφλό, που κάθισε στο στήθος της.",
+                    feedback_wrong:
+                        "Η σωστή απάντηση είναι η β. Η μητέρα της αγίας είδε ένα λευκό τυφλό πουλί στον ύπνο της, που κάθισε στο στήθος της.",
+                },
+                {
+                    q: "2. Η αγία Ματρώνα γεννήθηκε στη Μόσχα.",
+                    type: "tf",
+                    correct: false,
+                    feedback_correct:
+                        "Σωστά! Λάθος — η αγία Ματρώνα δεν γεννήθηκε στη Μόσχα αλλά στο χωριό Σεμπίνο της επαρχίας Τούλας.",
+                    feedback_wrong:
+                        "Λάθος. Η αγία Ματρώνα γεννήθηκε στο χωριό Σεμπίνο της επαρχίας Τούλας, όχι στη Μόσχα.",
+                },
+                {
+                    q: "3. Ο Θεός μια μέρα άνοιξε τα μάτια της αγίας Ματρώνας και είδε όλη τη δημιουργία Του.",
+                    type: "tf",
+                    correct: true,
+                    feedback_correct:
+                        "Σωστά! Ο Θεός άνοιξε για λίγο τα μάτια της ψυχής της ώστε να δει την ομορφιά της δημιουργίας Του.",
+                    feedback_wrong:
+                        "Σωστό είναι. Ο Θεός όντως άνοιξε τα μάτια της αγίας για να δει την όμορφη δημιουργία Του.",
+                },
+                {
+                    q: "4. Αόμματη σημαίνει:",
+                    type: "mc",
+                    opts: [
+                        "Ότι κάποια έχει μεγάλα μάτια.",
+                        "Ότι κάποια είναι τυφλή.",
+                        "Ότι κάποια φοράει γυαλιά στα μάτια.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Μπράβο! Αόμματη σημαίνει αυτή που δεν έχει μάτια — τυφλή.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Αόμματη = αυτή που δεν έχει μάτια, τυφλή.",
+                },
+                {
+                    q: "5. Στη βάπτιση της αγίας Ματρώνας έγινε το εξής θαύμα:",
+                    type: "mc",
+                    opts: [
+                        "Χτυπούσαν δυνατά οι καμπάνες σαν βροντές.",
+                        "Ένας λευκός καπνός απλώθηκε στον ναό που ευωδίαζε.",
+                        "Ένας καπνός φοβερός απλώθηκε παντού γιατί είχε πάρει φωτιά ένα σπίτι.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Κατά τη βάπτισή της ένας λευκός καπνός απλώθηκε στον ναό με υπέροχη ευωδία — σημάδι ότι το παιδί ήταν άγιο.",
+                    feedback_wrong:
+                        "Η σωστή απάντηση είναι η β. Ένας λευκός αρωματικός καπνός απλώθηκε στον ναό κατά τη βάπτιση.",
+                },
+                {
+                    q: "6. Η αγία Ματρώνα έβγαλε τον σταυρό από τον λαιμό της:",
+                    type: "mc",
+                    opts: [
+                        "Γιατί ήθελε άλλον καλύτερο.",
+                        "Γιατί είχε τον δικό της στο στήθος, σαν εξόγκωμα, στο δέρμα της.",
+                        "Γιατί θα ακολουθούσε τον δικό της σταυρό και δεν χρειαζόταν κι άλλον.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Η αγία είχε εκ γενετής έναν σταυρό στο στήθος της, χαραγμένο στο δέρμα της σαν ανάγλυφο.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Η αγία Ματρώνα είχε στο στήθος της έναν φυσικό σταυρό χαραγμένο στο δέρμα της.",
+                },
+                {
+                    q: "7. Η αγία Ματρώνα όταν βγήκε να παίξει με τα παιδιά του χωριού:",
+                    type: "mc",
+                    opts: [
+                        "Την έκαναν αρχηγό στα παιχνίδια τους.",
+                        "Την έριξαν σε έναν λάκκο και την τσουκνίδισαν με τσουκνίδες.",
+                        "Άρχισαν να παίζουν μαζί της κρυφτό και δεν την έβρισκαν με τίποτα.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Τα παιδιά του χωριού δεν ήταν καλοί φίλοι — την έριξαν σε λάκκο και την κάψαν με τσουκνίδες.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Τα παιδιά την κακομεταχειρίστηκαν — την έριξαν σε λάκκο και την τσουκνίδισαν.",
+                },
+                {
+                    q: "8. Στην αγία Ματρώνα πήγαινε πλήθος κόσμου στο σπίτι της για να της ζητήσει:",
+                    type: "mc",
+                    opts: ["Χρήματα.", "Βοήθεια και συμβουλές.", "Φιλοξενία."],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ο κόσμος έτρεχε στην αγία για βοήθεια, θεραπεία και σοφές συμβουλές.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ο κόσμος ζητούσε βοήθεια και συμβουλές από την αγία.",
+                },
+                {
+                    q: "9. Ο άγιος Ιωάννης της Κρονστάνδης όταν την είδε είπε δυνατά:",
+                    type: "mc",
+                    opts: [
+                        "«Αυτή είναι η διάδοχος του τσάρου!»",
+                        "«Αυτή είναι η διάδοχός μου!»",
+                        "«Αυτό το κορίτσι να ξέρετε ότι μας το έστειλε ο Θεός!»",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ο άγιος Ιωάννης της Κρονστάνδης αναγνώρισε αμέσως την αγιότητά της και είπε: «Αυτή είναι η διάδοχός μου!»",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ο άγιος Ιωάννης είπε «Αυτή είναι η διάδοχός μου!»",
+                },
+                {
+                    q: "10. Στα 16 της χρόνια η αγία Ματρώνα είχε μια δοκιμασία:",
+                    type: "mc",
+                    opts: [
+                        "Έχασε το σπίτι της και πήγε στη Μόσχα να μείνει.",
+                        "Δεν ξαναπερπάτησε.",
+                        "Έκανε τον γύρο του κόσμου και κρύωσε, γιατί έχασε το παλτό της.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Στα 16 της η αγία έχασε τη δύναμη να περπατά και από τότε καθόταν μόνο — νέα δοκιμασία που δέχτηκε με πίστη.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Στα 16 της η αγία έχασε τη δύναμη στα πόδια της και δεν ξαναπερπάτησε.",
+                },
+                {
+                    q: "11. Μια γριά γυναίκα της έκανε κάτι πολύ άσχημο:",
+                    type: "mc",
+                    opts: [
+                        "Τη χτύπησε με το μπαστούνι της στην πλάτη και έφυγε.",
+                        "Την ακούμπησε στην πλάτη και είπε κάτι ακαταλαβίστικα λόγια.",
+                        "Της έδωσε ένα αυγό και, τρώγοντάς το, κόντεψε να πνιγεί.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Μια γυναίκα την ακούμπησε στην πλάτη και μουρμούρισε ακαταλαβίστικα λόγια — ήταν κάποιου είδους κατάρα.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Μια γυναίκα την ακούμπησε στην πλάτη λέγοντας ακαταλαβίστικα λόγια.",
+                },
+                {
+                    q: "12. Η αγία Ματρώνα είπε να αγιογραφήσουν την εικόνα της Παναγίας:",
+                    type: "mc",
+                    opts: [
+                        "«Η Παναγία η Τριχερούσα».",
+                        "«Η Παναγία η Αμαρτωλών Σωτηρία».",
+                        "«Η Παναγία Άξιον Εστί».",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Η αγία Ματρώνα ζήτησε να αγιογραφήσουν την εικόνα «Η Παναγία η Αμαρτωλών Σωτηρία».",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. «Η Παναγία η Αμαρτωλών Σωτηρία».",
+                },
+                {
+                    q: "13. Ο αγιογράφος ποτέ στη ζωή του δεν εξομολογήθηκε.",
+                    type: "tf",
+                    correct: true,
+                    feedback_correct:
+                        "Σωστά! Ο αγιογράφος δεν είχε εξομολογηθεί ποτέ στη ζωή του — και η αγία το ήξερε χωρίς να του το πει κανείς.",
+                    feedback_wrong:
+                        "Σωστό είναι: ο αγιογράφος δεν είχε πάει ποτέ σε εξομολόγηση.",
+                },
+                {
+                    q: "14. Η αγία Ματρώνα έβγαινε από το σπίτι της μόνο για να πάει στην εκκλησία.",
+                    type: "tf",
+                    correct: true,
+                    feedback_correct:
+                        "Σωστά! Η αγία έβγαινε μόνο για να πηγαίνει στην εκκλησία — αυτό ήταν η μόνη της «έξοδος».",
+                    feedback_wrong:
+                        "Σωστό είναι: η αγία έβγαινε από το σπίτι μόνο για να πάει στην εκκλησία.",
+                },
+                {
+                    q: "15. Ο αγιογράφος έπεσε στα γόνατα και ζητούσε συγνώμη από την αγία:",
+                    type: "mc",
+                    opts: [
+                        "Γιατί έφτιαξε άλλη εικόνα από αυτήν που του παρήγγειλε.",
+                        "Γιατί προσπάθησε να την ξεγελάσει, κρύβοντας μια αμαρτία του.",
+                        "Γιατί η τιμή της εικόνας ήταν πολύ ακριβή.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ο αγιογράφος ζήτησε συγχώρεση γιατί προσπάθησε να κρύψει αμαρτία του από την αγία — αλλά αυτή τα ήξερε όλα.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ο αγιογράφος ζήτησε συγχώρεση για μια αμαρτία που προσπάθησε να κρύψει.",
+                },
+                {
+                    q: "16. Η αγία Ματρώνα έδωσε σε τρεις γυναίκες από ένα δωράκι. Ποια ήταν σωστή σειρά (πρώτη, δεύτερη, τρίτη);",
+                    type: "mc",
+                    opts: [
+                        "Κόκκινο λουλούδι — κόκκινο αυγό — άσπρο αυγό.",
+                        "Κόκκινο αυγό — άσπρο αυγό — κόκκινο λουλούδι.",
+                        "Άσπρο αυγό — κόκκινο λουλούδι — κόκκινο αυγό.",
+                    ],
+                    correct: 0,
+                    feedback_correct:
+                        "Σωστά! Στην πρώτη έδωσε κόκκινο λουλούδι, στη δεύτερη κόκκινο αυγό και στην τρίτη άσπρο αυγό.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: α. Κόκκινο λουλούδι → κόκκινο αυγό → άσπρο αυγό.",
+                },
+                {
+                    q: "17. Από το δωράκι της αγίας Ματρώνας στην τρίτη γυναίκα τι πετάχτηκε;",
+                    type: "mc",
+                    opts: ["Ένα φίδι.", "Ένα ποντίκι.", "Ένα μικρό πουλάκι."],
+                    correct: 0,
+                    feedback_correct:
+                        "Σωστά! Από το άσπρο αυγό που έδωσε στην τρίτη γυναίκα πετάχτηκε ένα φίδι — αποκαλύπτοντας κάτι κακό.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: α. Από το δωράκι πετάχτηκε ένα φίδι.",
+                },
+                {
+                    q: "18. Η αγία Ματρώνα προειδοποίησε τον αστυνομικό που πήγε να τη συλλάβει ότι:",
+                    type: "mc",
+                    opts: [
+                        "Θα απολυθεί από τη δουλειά του.",
+                        "Κάτι πολύ κακό συμβαίνει εκείνη τη στιγμή στο σπίτι του.",
+                        "Θα πρέπει να κάνει διακοπές για να ξεκουραστεί λιγάκι.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Η αγία του είπε ότι εκείνη τη στιγμή κάτι πολύ κακό συνέβαινε στο σπίτι του — και έτσι ήταν.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Η αγία προειδοποίησε τον αστυνομικό ότι κάτι κακό συμβαίνει εκείνη τη στιγμή στο σπίτι του.",
+                },
+                {
+                    q: "19. Στην τελευταία εικόνα του βιβλίου η αγία Ματρώνα είναι με δύο αδέλφια και ένα ζώο. Τι ζώο είναι αυτό και τι κρατά στο χέρι της;",
+                    type: "mc",
+                    opts: [
+                        "Είναι μια κότα και κρατά ένα πουλάκι.",
+                        "Είναι μια αγελάδα και κρατά στάχυα.",
+                        "Είναι ένα άλογο και κρατά τσουκνίδες.",
+                    ],
+                    correct: 0,
+                    feedback_correct:
+                        "Σωστά! Στην τελευταία εικόνα υπάρχει μια κότα και η αγία κρατά ένα μικρό πουλάκι στο χέρι της.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: α. Μια κότα και η αγία κρατά ένα πουλάκι.",
+                },
+                {
+                    q: "20. Την αγία Ματρώνα δεν την ξεχνάμε ποτέ και την αγαπάμε πολύ:",
+                    type: "mc",
+                    opts: [
+                        "Γιατί ήταν πολύ πλούσια.",
+                        "Γιατί έκανε θαύματα με τη βοήθεια του Θεού και βοηθούσε πολλούς ανθρώπους.",
+                        "Γιατί ήταν πολύ μορφωμένη.",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Μπράβο! Η αγία Ματρώνα αγαπιέται γιατί με τη χάρη του Θεού έκανε θαύματα και βοηθούσε αναρίθμητους ανθρώπους.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Γιατί έκανε θαύματα με τη βοήθεια του Θεού και βοηθούσε πολλούς ανθρώπους.",
+                },
+            ];
+
+            // State
+            let cur = 0;
+            let score = 0;
+            let picked = null; // index of picked option, or true/false for tf
+            let answered = new Array(QS.length).fill(null); // null | {picked, correct}
+            let started = false; // skip the scroll on first render
+
+            function $(id) {
+                return document.getElementById(id);
+            }
+
+            function scrollToQuiz() {
+                if (!started) return;
+                const el = document.querySelector(".quiz");
+                if (el)
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            function go() {
+                scrollToQuiz();
+                if (cur >= QS.length) {
+                    showResult();
+                    return;
+                }
+                showQuestion();
+            }
+
+            function showQuestion() {
+                $("quizProg").classList.remove("quiz-hidden");
+
+                const pct = Math.round(((cur + 1) / QS.length) * 100);
+                $("quizProgTxt").textContent =
+                    `Ερώτηση ${cur + 1} / ${QS.length}`;
+                $("quizProgPct").textContent = pct + "%";
+                $("quizProgFill").style.width = pct + "%";
+
+                const q = QS[cur];
+                const ans = answered[cur];
+                const isAnswered = ans !== null;
+
+                let inputHtml = "";
+
+                if (q.type === "mc") {
+                    const letters = ["α", "β", "γ", "δ"];
+                    inputHtml =
+                        `<div class="quiz-opts">` +
+                        q.opts
+                            .map((opt, i) => {
+                                let cls = "quiz-opt";
+                                if (isAnswered) {
+                                    if (i === q.correct) cls += " correct-opt";
+                                    else if (i === ans.picked)
+                                        cls += " wrong-opt";
+                                } else if (ans === null && picked === i) {
+                                    cls += " picked";
+                                }
+                                return `<button class="${cls}" onclick="pickMC(${i})" ${isAnswered ? "disabled" : ""}>
+        <span class="quiz-opt-letter">${letters[i]}</span>
+        <span>${opt}</span>
+      </button>`;
+                            })
+                            .join("") +
+                        `</div>`;
+                } else {
+                    // true/false
+                    let trueClass = "quiz-tf-btn",
+                        falseClass = "quiz-tf-btn";
+                    if (isAnswered) {
+                        if (q.correct === true) {
+                            trueClass += " correct-tf";
+                            falseClass += " wrong-tf";
+                        } else {
+                            falseClass += " correct-tf";
+                            trueClass += " wrong-tf";
+                        }
+                    }
+                    inputHtml = `<div class="quiz-tf-row">
+      <button class="${trueClass}" onclick="pickTF(true)" ${isAnswered ? "disabled" : ""}>✓ Σωστό</button>
+      <button class="${falseClass}" onclick="pickTF(false)" ${isAnswered ? "disabled" : ""}>✗ Λάθος</button>
+    </div>`;
+                }
+
+                // Feedback
+                let feedbackHtml = "";
+                if (isAnswered) {
+                    const ok = ans.correct;
+                    feedbackHtml = `<div class="quiz-feedback ${ok ? "correct" : "wrong"}">
+      <span class="quiz-feedback-icon">${ok ? "✅" : "❌"}</span>
+      ${ok ? q.feedback_correct : q.feedback_wrong}
+    </div>`;
+                }
+
+                // Next button label
+                const isLast = cur === QS.length - 1;
+                const nextLabel = isLast
+                    ? "Δείξε αποτέλεσμα →"
+                    : "Επόμενο →";
+
+                $("quizApp").innerHTML = `
+    <div class="quiz-card quiz-anim">
+      <div class="quiz-qnum">Ερώτηση ${String(cur + 1).padStart(2, "0")}</div>
+      <div class="quiz-qtxt">${q.q}</div>
+      ${inputHtml}
+      ${feedbackHtml}
+    </div>
+    <div class="quiz-nav">
+      <button class="quiz-btn quiz-btn-sec" ${cur === 0 ? 'style="visibility:hidden"' : ""} onclick="goBack()">← Πίσω</button>
+      <button class="quiz-btn quiz-btn-pri" id="quizNextBtn" ${isAnswered ? "" : "disabled"} onclick="goNext()">${nextLabel}</button>
+    </div>
+  `;
+            }
+
+            function pickMC(i) {
+                if (answered[cur] !== null) return;
+                const q = QS[cur];
+                const correct = i === q.correct;
+                answered[cur] = { picked: i, correct };
+                if (correct) score++;
+                showQuestion();
+            }
+
+            function pickTF(val) {
+                if (answered[cur] !== null) return;
+                const q = QS[cur];
+                const correct = val === q.correct;
+                answered[cur] = { picked: val, correct };
+                if (correct) score++;
+                showQuestion();
+            }
+
+            function goNext() {
+                started = true;
+                cur++;
+                go();
+            }
+
+            function goBack() {
+                if (cur > 0) {
+                    started = true;
+                    cur--;
+                    go();
+                }
+            }
+
+            function showResult() {
+                $("quizProg").classList.add("quiz-hidden");
+
+                const pct = Math.round((score / QS.length) * 100);
+                let stars = "";
+                if (pct >= 90) stars = "⭐⭐⭐⭐⭐";
+                else if (pct >= 75) stars = "⭐⭐⭐⭐";
+                else if (pct >= 60) stars = "⭐⭐⭐";
+                else if (pct >= 40) stars = "⭐⭐";
+                else stars = "⭐";
+
+                let msg = "";
+                if (pct >= 90)
+                    msg =
+                        "Εξαιρετικό! Γνωρίζεις πολύ καλά την αγία Ματρώνα!";
+                else if (pct >= 75)
+                    msg =
+                        "Πολύ καλά! Θυμάσαι τα περισσότερα από το βιβλίο!";
+                else if (pct >= 60)
+                    msg =
+                        "Καλά! Ίσως αξίζει να ξαναδιαβάσεις κάποιες σελίδες.";
+                else
+                    msg =
+                        "Συνέχισε! Διάβασε ξανά το βιβλίο και δοκίμασε πάλι!";
+
+                $("quizApp").innerHTML = `
+    <div class="quiz-card quiz-result quiz-anim">
+      <div class="quiz-result-icon">✝</div>
+      <h2>Αποτέλεσμα Κουίζ</h2>
+      <div class="quiz-result-score">${score} / ${QS.length}</div>
+      <div class="quiz-stars">${stars}</div>
+      <div class="quiz-result-msg">${msg}</div>
+      <div class="quiz-sc-grid">
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#2e7d32">${score}</div>
+          <div class="lbl">Σωστές</div>
+        </div>
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#b3261e">${QS.length - score}</div>
+          <div class="lbl">Λάθος</div>
+        </div>
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#b266ff">${pct}%</div>
+          <div class="lbl">Επιτυχία</div>
+        </div>
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#cd8602">${QS.length}</div>
+          <div class="lbl">Συνολικές</div>
+        </div>
+      </div>
+      <div class="quiz-result-sub">«Αγία Ματρώνα, πρέσβευε υπέρ ημών!»</div>
+      <button class="quiz-btn quiz-btn-pri" onclick="restart()" style="margin-top:8px">Επανάληψη ↺</button>
+    </div>
+  `;
+            }
+
+            function restart() {
+                cur = 0;
+                score = 0;
+                answered = new Array(QS.length).fill(null);
+                $("quizProg").classList.remove("quiz-hidden");
+                go();
+            }
+
+            go();
+        </script>
+    </body>
+</html>
