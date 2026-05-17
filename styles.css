@@ -566,3 +566,18 @@ main {
         padding-left: 42px;
     }
 }
+
+/* Phones: the container and the content card each add horizontal padding.
+   Stacked, the desktop values (24px + 40px) leave very little room on a
+   narrow screen, so tighten both below the phone breakpoint. */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 14px;
+    }
+    main {
+        padding: 28px 0;
+    }
+    .page-content {
+        padding: 20px 16px;
+    }
+}

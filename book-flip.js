@@ -76,6 +76,12 @@ book-flip .book-hint {
     font-style: italic;
     color: #555;
 }
+@media (max-width: 600px) {
+    book-flip .book-stage {
+        margin-top: 16px;
+        padding: 8px;
+    }
+}
 `;
 
     const TEMPLATE = `
@@ -127,9 +133,9 @@ book-flip .book-hint {
                 width: 550,
                 height: 733,
                 size: "stretch",
-                minWidth: 315,
+                minWidth: 240,
                 maxWidth: 1000,
-                minHeight: 420,
+                minHeight: 320,
                 maxHeight: 1350,
                 maxShadowOpacity: 0.5,
                 showCover: true,
