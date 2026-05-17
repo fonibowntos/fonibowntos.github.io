@@ -29,9 +29,6 @@
                             <li>
                                 <a class="menu-link" href="agios_symeon_agios_ioannis.html">Άγιος Συμεών ο δια Χριστόν Σαλός και Άγιος Ιωάννης</a>
                             </li>
-                            <li>
-                                <a class="menu-link" href="drastiriotites.html">Δραστηριότητες</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="has-submenu">
@@ -58,6 +55,9 @@
                     </li>
                     <li>
                         <a class="menu-link" href="paidika_tragoudia.html">Τραγούδια</a>
+                    </li>
+                    <li>
+                        <a class="menu-link" href="drastiriotites.html">Δραστηριότητες - Quiz</a>
                     </li>
                 </ul>
             </li>
