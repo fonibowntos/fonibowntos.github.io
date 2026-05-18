@@ -65,6 +65,9 @@
                             <li>
                                 <a class="menu-link" href="agia_matrona_quiz.html">Αγία Ματρώνα Quiz</a>
                             </li>
+                            <li>
+                                <a class="menu-link" href="agios_panteleimonas_quiz.html">Άγιος Παντελεήμονας Quiz</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

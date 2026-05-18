@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="el">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Άγιος Παντελεήμονας Quiz — agathoniki.com</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            /* Quiz — scoped under .quiz so it inherits the site palette
+               (purple #b266ff / gold #cd8602 / Special Elite) and never
+               leaks into the rest of the site. */
+            .quiz {
+                max-width: 640px;
+                margin: 24px auto 0;
+            }
+            .quiz-prog {
+                margin-bottom: 20px;
+            }
+            .quiz-prog-meta {
+                display: flex;
+                justify-content: space-between;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 14px;
+                color: #6b6b6b;
+                letter-spacing: 0.04em;
+                margin-bottom: 6px;
+            }
+            .quiz-prog-track {
+                height: 8px;
+                background: rgba(178, 102, 255, 0.18);
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                border-radius: 6px;
+                overflow: hidden;
+            }
+            .quiz-prog-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #b266ff, #cd8602);
+                transition: width 0.5s ease;
+            }
+
+            .quiz-card {
+                background: rgba(255, 255, 255, 0.6);
+                border: 1px solid rgba(178, 102, 255, 0.4);
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+                padding: 24px 22px;
+                margin-bottom: 14px;
+            }
+            .quiz-qnum {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 13px;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: #b266ff;
+                margin-bottom: 10px;
+            }
+            .quiz-qtxt {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #1a1a1a;
+                margin-bottom: 18px;
+            }
+
+            .quiz-opts {
+                display: flex;
+                flex-direction: column;
+                gap: 9px;
+            }
+            .quiz-opt {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+                text-align: left;
+                background: rgba(255, 255, 255, 0.55);
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                border-radius: 4px;
+                padding: 12px 14px;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 1rem;
+                line-height: 1.45;
+                color: #1a1a1a;
+                cursor: pointer;
+                transition:
+                    background 0.18s ease,
+                    border-color 0.18s ease,
+                    transform 0.18s ease;
+            }
+            .quiz-opt-letter {
+                flex: 0 0 auto;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 13px;
+                background: rgba(178, 102, 255, 0.18);
+                color: #7a3fc0;
+                transition:
+                    background 0.18s ease,
+                    color 0.18s ease;
+            }
+            .quiz-opt:hover:not(:disabled) {
+                border-color: #b266ff;
+                background: rgba(178, 102, 255, 0.1);
+                transform: translateX(3px);
+            }
+            .quiz-opt:hover:not(:disabled) .quiz-opt-letter {
+                background: #b266ff;
+                color: #fff;
+            }
+
+            .quiz-tf-row {
+                display: flex;
+                gap: 12px;
+            }
+            .quiz-tf-btn {
+                flex: 1;
+                padding: 12px 14px;
+                border-radius: 4px;
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                background: rgba(255, 255, 255, 0.55);
+                color: #1a1a1a;
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.18s ease;
+            }
+            .quiz-tf-btn:hover:not(:disabled) {
+                background: #b266ff;
+                color: #fff;
+                border-color: #b266ff;
+            }
+
+            .quiz-opt.picked {
+                border-color: #b266ff;
+                background: rgba(178, 102, 255, 0.14);
+            }
+            .quiz-opt.picked .quiz-opt-letter {
+                background: #b266ff;
+                color: #fff;
+            }
+            .quiz-tf-btn.picked {
+                background: #b266ff;
+                color: #fff;
+                border-color: #b266ff;
+            }
+
+            .quiz-opt.correct-opt {
+                border-color: rgba(46, 125, 50, 0.55);
+                background: rgba(46, 125, 50, 0.12);
+            }
+            .quiz-opt.correct-opt .quiz-opt-letter {
+                background: #2e7d32;
+                color: #fff;
+            }
+            .quiz-opt.wrong-opt {
+                border-color: rgba(179, 38, 30, 0.5);
+                background: rgba(179, 38, 30, 0.1);
+                opacity: 0.75;
+            }
+            .quiz-tf-btn.correct-tf {
+                background: #2e7d32;
+                color: #fff;
+                border-color: #2e7d32;
+            }
+            .quiz-tf-btn.wrong-tf {
+                background: rgba(179, 38, 30, 0.1);
+                color: #b3261e;
+                border-color: rgba(179, 38, 30, 0.45);
+                opacity: 0.8;
+            }
+            .quiz-opt:disabled,
+            .quiz-tf-btn:disabled {
+                cursor: default;
+            }
+
+            .quiz-feedback {
+                margin-top: 14px;
+                border-radius: 4px;
+                padding: 14px 16px;
+                font-size: 0.98rem;
+                line-height: 1.6;
+                animation: quizPop 0.3s ease both;
+            }
+            .quiz-feedback.correct {
+                background: rgba(46, 125, 50, 0.1);
+                border: 1px solid rgba(46, 125, 50, 0.4);
+                color: #1f5b23;
+            }
+            .quiz-feedback.wrong {
+                background: rgba(179, 38, 30, 0.08);
+                border: 1px solid rgba(179, 38, 30, 0.35);
+                color: #8a1c16;
+            }
+            .quiz-feedback-icon {
+                margin-right: 6px;
+            }
+
+            .quiz-nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .quiz-btn {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 0.98rem;
+                letter-spacing: 0.03em;
+                padding: 11px 22px;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.18s ease;
+                border: 1px solid transparent;
+            }
+            .quiz-btn-sec {
+                background: transparent;
+                border-color: rgba(178, 102, 255, 0.5);
+                color: #6b6b6b;
+            }
+            .quiz-btn-sec:hover {
+                border-color: #b266ff;
+                color: #b266ff;
+            }
+            .quiz-btn-pri {
+                background: #b266ff;
+                color: #fff;
+                box-shadow: 0 2px 8px rgba(178, 102, 255, 0.35);
+            }
+            .quiz-btn-pri:hover {
+                background: #8a3fd1;
+            }
+            .quiz-btn-pri:disabled {
+                opacity: 0.35;
+                cursor: not-allowed;
+                box-shadow: none;
+            }
+
+            .quiz-result {
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .quiz-result-icon {
+                font-size: 42px;
+                color: #b266ff;
+                margin-bottom: 12px;
+            }
+            .quiz-result h2 {
+                font-family: "Special Elite", Georgia, serif;
+                color: #b266ff;
+                text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+                margin: 0 0 6px;
+            }
+            .quiz-result-score {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 46px;
+                color: #b266ff;
+                margin: 10px 0;
+            }
+            .quiz-stars {
+                font-size: 26px;
+                letter-spacing: 4px;
+                margin: 6px 0 16px;
+            }
+            .quiz-result-msg {
+                font-size: 1.05rem;
+                color: #1a1a1a;
+                margin-bottom: 20px;
+                line-height: 1.55;
+            }
+            .quiz-sc-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-bottom: 22px;
+                text-align: left;
+            }
+            .quiz-sc-item {
+                background: rgba(255, 255, 255, 0.55);
+                border: 1px solid rgba(178, 102, 255, 0.35);
+                border-radius: 4px;
+                padding: 12px 14px;
+            }
+            .quiz-sc-item .num {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 22px;
+            }
+            .quiz-sc-item .lbl {
+                font-family: "Special Elite", Georgia, serif;
+                font-size: 12px;
+                color: #6b6b6b;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+            .quiz-result-sub {
+                font-style: italic;
+                color: #555;
+                margin-bottom: 20px;
+            }
+
+            @keyframes quizPop {
+                from {
+                    opacity: 0;
+                    transform: translateY(6px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes quizFade {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .quiz-anim {
+                animation: quizFade 0.35s ease both;
+            }
+            .quiz-hidden {
+                display: none !important;
+            }
+        </style>
+        <script src="header.js" defer></script>
+        <script src="menu.js" defer></script>
+        <script src="footer.js" defer></script>
+        <script src="breadcrumbs.js" defer></script>
+    </head>
+    <body>
+        <site-header></site-header>
+        <site-menu></site-menu>
+        <main class="container">
+            <site-breadcrumbs>
+                <li><a href="index.html">Αρχική</a></li>
+                <li>Παιδικά</li>
+                <li>Δραστηριότητες - Quiz</li>
+                <li aria-current="page">Άγιος Παντελεήμονας Quiz</li>
+            </site-breadcrumbs>
+            <div class="page-content">
+                <div class="page-content-inner">
+                    <h1>Άγιος Παντελεήμονας Quiz</h1>
+                    <p>
+                        Κουίζ για τον βίο του Αγίου Παντελεήμονος, του
+                        Μεγαλομάρτυρος και Ιαματικού. Τριάντα μία ερωτήσεις
+                        με άμεσο σχόλιο σε κάθε απάντηση. Καλή επιτυχία!
+                    </p>
+
+                    <div class="quiz">
+                        <div class="quiz-prog" id="quizProg">
+                            <div class="quiz-prog-meta">
+                                <span id="quizProgTxt">Ερώτηση 1 / 31</span>
+                                <span id="quizProgPct">3%</span>
+                            </div>
+                            <div class="quiz-prog-track">
+                                <div
+                                    class="quiz-prog-fill"
+                                    id="quizProgFill"
+                                    style="width: 3%"
+                                ></div>
+                            </div>
+                        </div>
+                        <div id="quizApp"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <site-footer></site-footer>
+
+        <script>
+            // Question types: 'mc' = multiple choice (one correct), 'tf' = true/false
+            const QS = [
+                {
+                    q: "1. Πώς λεγόταν ο Άγιος από τη γέννηση έως και τη βάπτισή του;",
+                    type: "mc",
+                    opts: ["Ερμόλαος", "Παντολέων", "Ευστόργιος", "Μαξιμιανός"],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Λεγόταν Παντολέων — τόσο πριν όσο και μετά τη βάπτιση.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Λεγόταν Παντολέων — τόσο πριν όσο και μετά τη βάπτιση.",
+                },
+                {
+                    q: "2. Πότε και πώς άλλαξε το όνομά του σε Παντελεήμων;",
+                    type: "mc",
+                    opts: [
+                        "Στη βάπτισή του",
+                        "Όταν άρχισε να θεραπεύει",
+                        "Με φωνή Θεού κατά τον αποκεφαλισμό",
+                        "Όταν μαρτύρησε ο Ερμόλαος",
+                    ],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Ο Θεός με φωνή άλλαξε το όνομά του σε Παντελεήμων την ώρα του αποκεφαλισμού.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Ο Θεός με φωνή άλλαξε το όνομά του σε Παντελεήμων την ώρα του αποκεφαλισμού.",
+                },
+                {
+                    q: "3. Τι σημαίνει το όνομα «Παντολέων»;",
+                    type: "mc",
+                    opts: [
+                        "Πάντοτε ελεήμων",
+                        "Σε όλα λιοντάρι",
+                        "Πάντα νικητής",
+                        "Ο πρώτος μεταξύ λεόντων",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! «Παντολέων» = παντού + λέων (λιοντάρι).",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. «Παντολέων» = παντού + λέων (λιοντάρι).",
+                },
+                {
+                    q: "4. Τι σημαίνει το όνομα «Παντελεήμων»;",
+                    type: "mc",
+                    opts: [
+                        "Ο πάντα δυνατός",
+                        "Αυτός που ελεεί όλους",
+                        "Ο πάντα ελεύθερος",
+                        "Αυτός που νικά όλους",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! «Παντελεήμων» = πάντα + ελεήμων.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. «Παντελεήμων» = πάντα + ελεήμων.",
+                },
+                {
+                    q: "5. Πού γεννήθηκε ο Άγιος Παντελεήμονας;",
+                    type: "mc",
+                    opts: [
+                        "Αντιόχεια",
+                        "Κωνσταντινούπολη",
+                        "Νικομήδεια",
+                        "Έφεσος",
+                    ],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Γεννήθηκε στη Νικομήδεια της Βιθυνίας.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Γεννήθηκε στη Νικομήδεια της Βιθυνίας.",
+                },
+                {
+                    q: "6. Ποιο επάγγελμα είχε ο Άγιος;",
+                    type: "mc",
+                    opts: ["Στρατιώτης", "Ιερέας", "Ιατρός", "Έμπορος"],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Ήταν ιατρός — γι' αυτό τιμάται ως Ανάργυρος.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Ήταν ιατρός — γι' αυτό τιμάται ως Ανάργυρος.",
+                },
+                {
+                    q: "7. Πώς λεγόταν ο πατέρας του Αγίου;",
+                    type: "mc",
+                    opts: [
+                        "Ερμόλαος",
+                        "Ευφρόσυνος",
+                        "Ευστόργιος",
+                        "Μαξιμιανός",
+                    ],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Ο πατέρας του λεγόταν Ευστόργιος — ειδωλολάτρης αρχικά.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Ο πατέρας του λεγόταν Ευστόργιος — ειδωλολάτρης αρχικά.",
+                },
+                {
+                    q: "8. Πώς λεγόταν η μητέρα του Αγίου;",
+                    type: "mc",
+                    opts: ["Ευστοργία", "Εὐβούλη", "Ευφροσύνη", "Αναστασία"],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Η μητέρα του λεγόταν Εὐβούλη — ήταν χριστιανή.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Η μητέρα του λεγόταν Εὐβούλη — ήταν χριστιανή.",
+                },
+                {
+                    q: "9. Ποιος κατήχησε τον Άγιο στη χριστιανική πίστη;",
+                    type: "mc",
+                    opts: [
+                        "Ο Επίσκοπος Νικομηδείας",
+                        "Ο Άγιος Ερμόλαος",
+                        "Η μητέρα του",
+                        "Ο Απόστολος Παύλος",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ο Άγιος Ερμόλαος τον κατήχησε κρυφά.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ο Άγιος Ερμόλαος τον κατήχησε κρυφά.",
+                },
+                {
+                    q: "10. Ποιος ήταν ο δάσκαλος ιατρικής του Αγίου;",
+                    type: "mc",
+                    opts: [
+                        "Ερμόλαος",
+                        "Ευστόργιος",
+                        "Ευφρόσυνος",
+                        "Μαξιμιανός",
+                    ],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Ο Ευφρόσυνος ήταν ο δάσκαλος ιατρικής του Αγίου.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Ο Ευφρόσυνος ήταν ο δάσκαλος ιατρικής του Αγίου.",
+                },
+                {
+                    q: "11. Ποιο ήταν το πρώτο μεγάλο θαύμα του Αγίου;",
+                    type: "mc",
+                    opts: [
+                        "Θεράπευσε παράλυτο",
+                        "Ανέστησε παιδί δαγκωμένο από φίδι",
+                        "Θεράπευσε τυφλό χωρίς φάρμακα",
+                        "Σταμάτησε θύελλα",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ανέστησε νεκρό παιδί που το είχε δαγκώσει φίδι — το φίδι ψόφησε επί τόπου.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ανέστησε νεκρό παιδί που το είχε δαγκώσει φίδι — το φίδι ψόφησε επί τόπου.",
+                },
+                {
+                    q: "12. Πώς θεράπευσε ο Άγιος τον τυφλό;",
+                    type: "mc",
+                    opts: [
+                        "Με βότανα",
+                        "Με επίθεση χεριών και επίκληση του Χριστού",
+                        "Με χειρουργική επέμβαση",
+                        "Με νηστεία",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Επικαλέστηκε τον Χριστό και ο τυφλός ανέβλεψε — χωρίς φάρμακα.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Επικαλέστηκε τον Χριστό και ο τυφλός ανέβλεψε — χωρίς φάρμακα.",
+                },
+                {
+                    q: "13. Ο Άγιος Παντελεήμονας θεράπευε τους ασθενείς δωρεάν.",
+                    type: "tf",
+                    correct: true,
+                    feedback_correct:
+                        "Σωστά! Ο Άγιος θεράπευε δωρεάν — γι' αυτό τιμάται ως «Ανάργυρος», δεν έπαιρνε χρήματα.",
+                    feedback_wrong:
+                        "Λάθος. Το σωστό είναι «Σωστό»: ο Άγιος θεράπευε δωρεάν — γι' αυτό τιμάται ως «Ανάργυρος».",
+                },
+                {
+                    q: "14. Τι σημαίνει ο τίτλος «Ανάργυρος»;",
+                    type: "mc",
+                    opts: [
+                        "Αυτός που δεν έχει ασήμι",
+                        "Αυτός που δεν παίρνει αμοιβή για θεραπείες",
+                        "Αυτός που αγαπά τους φτωχούς",
+                        "Αυτός που νικά τον πλούτο",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! «Ανάργυρος» = δεν παίρνει χρήματα για τις θεραπείες.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. «Ανάργυρος» = δεν παίρνει χρήματα για τις θεραπείες.",
+                },
+                {
+                    q: "15. Ποιος ήταν ο διώκτης του Αγίου;",
+                    type: "mc",
+                    opts: ["Νέρωνας", "Διοκλητιανός", "Μαξιμιανός", "Δέκιος"],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Ο αυτοκράτορας Μαξιμιανός ήταν ο διώκτης.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Ο αυτοκράτορας Μαξιμιανός ήταν ο διώκτης.",
+                },
+                {
+                    q: "16. Ο πατέρας του Αγίου ασπάστηκε τελικά τον Χριστιανισμό.",
+                    type: "tf",
+                    correct: true,
+                    feedback_correct:
+                        "Σωστά! Βλέποντας τα θαύματα του γιου του, ο Ευστόργιος έγινε χριστιανός.",
+                    feedback_wrong:
+                        "Λάθος. Το σωστό είναι «Σωστό»: βλέποντας τα θαύματα του γιου του, ο Ευστόργιος έγινε χριστιανός.",
+                },
+                {
+                    q: "17. Τι βασανιστήριο ΔΕΝ υπέστη ο Άγιος Παντελεήμονας;",
+                    type: "mc",
+                    opts: [
+                        "Καζάνι με βραστό νερό",
+                        "Τροχός",
+                        "Σταύρωση",
+                        "Ρίψη στη θάλασσα με πέτρα",
+                    ],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Ο Άγιος δεν σταυρώθηκε — αποκεφαλίστηκε στο τέλος.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Ο Άγιος δεν σταυρώθηκε — αποκεφαλίστηκε στο τέλος.",
+                },
+                {
+                    q: "18. Τι συνέβη όταν τον έριξαν στο καζάνι με βραστό νερό;",
+                    type: "mc",
+                    opts: [
+                        "Κάηκε σοβαρά",
+                        "Βγήκε αλώβητος",
+                        "Το νερό κρύωσε αμέσως",
+                        "Το καζάνι έσπασε",
+                    ],
+                    correct: 1,
+                    feedback_correct: "Σωστά! Βγήκε εντελώς αλώβητος.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Βγήκε εντελώς αλώβητος.",
+                },
+                {
+                    q: "19. Ποιος εμφανίστηκε στον Άγιο μέσα στο καζάνι;",
+                    type: "mc",
+                    opts: [
+                        "Ο Αρχάγγελος Μιχαήλ",
+                        "Η Θεοτόκος",
+                        "Ο Χριστός",
+                        "Η μορφή του Αγίου Ερμόλαου",
+                    ],
+                    correct: 3,
+                    feedback_correct:
+                        "Σωστά! Η μορφή του Αγίου Ερμόλαου εμφανίστηκε στο καζάνι για να ενισχύσει τον Άγιο.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: δ. Η μορφή του Αγίου Ερμόλαου εμφανίστηκε στο καζάνι για να ενισχύσει τον Άγιο.",
+                },
+                {
+                    q: "20. Τι έγινε με τον τροχό βασανισμού;",
+                    type: "mc",
+                    opts: [
+                        "Τον έσπασε με τα χέρια του",
+                        "Έπεσε πάνω στους βασανιστές",
+                        "Τον σταμάτησε με προσευχή",
+                        "Άλλαξε κατεύθυνση μόνος του",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ο τροχός κύλισε και έπεσε πάνω στους βασανιστές.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ο τροχός κύλισε και έπεσε πάνω στους βασανιστές.",
+                },
+                {
+                    q: "21. Τι έγινε όταν τον έριξαν στη θάλασσα με πέτρα στο λαιμό;",
+                    type: "mc",
+                    opts: [
+                        "Βούλιαξε και σώθηκε από ψαράδες",
+                        "Η πέτρα έγινε ελαφριά",
+                        "Περπάτησε πάνω στο νερό",
+                        "Η θάλασσα τον έφερε στην ακτή",
+                    ],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Περπάτησε πάνω στο νερό σαν σε στεριά.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Περπάτησε πάνω στο νερό σαν σε στεριά.",
+                },
+                {
+                    q: "22. Πόσα λιοντάρια άφησαν στην αρένα μαζί του;",
+                    type: "mc",
+                    opts: ["Ένα", "Τρία", "Δύο", "Πέντε"],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Δύο λιοντάρια, νηστικά τρεις μέρες — αλλά δεν τον άγγιξαν.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Δύο λιοντάρια, νηστικά τρεις μέρες — αλλά δεν τον άγγιξαν.",
+                },
+                {
+                    q: "23. Τα λιοντάρια της αρένας δεν άγγιξαν τον Άγιο.",
+                    type: "tf",
+                    correct: true,
+                    feedback_correct:
+                        "Σωστά! Τα λιοντάρια δεν τον άγγιξαν — αντίθετα, έγλειφαν τα πόδια του.",
+                    feedback_wrong:
+                        "Λάθος. Το σωστό είναι «Σωστό»: τα λιοντάρια δεν τον άγγιξαν — έγλειφαν τα πόδια του.",
+                },
+                {
+                    q: "24. Τι συνέβη στα ξίφη που προσπάθησαν αρχικά να τον αποκεφαλίσουν;",
+                    type: "mc",
+                    opts: [
+                        "Έσπασαν στα δύο",
+                        "Έλιωσαν σαν κερί",
+                        "Γλίστρησαν από τα χέρια των δημίων",
+                        "Τα χέρια των δημίων παρέλυσαν",
+                    ],
+                    correct: 1,
+                    feedback_correct: "Σωστά! Τα ξίφη έλιωσαν σαν κερί.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Τα ξίφη έλιωσαν σαν κερί.",
+                },
+                {
+                    q: "25. Τι έρρευσε από το λαιμό του Αγίου κατά τον αποκεφαλισμό;",
+                    type: "mc",
+                    opts: [
+                        "Μόνο αίμα",
+                        "Αίμα και γάλα",
+                        "Μύρο και αίμα",
+                        "Μόνο μύρο",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Έρρευσε αίμα και γάλα — όπως και στον Απόστολο Παύλο.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Έρρευσε αίμα και γάλα — όπως και στον Απόστολο Παύλο.",
+                },
+                {
+                    q: "26. Πότε εορτάζεται ο Άγιος Παντελεήμονας;",
+                    type: "mc",
+                    opts: [
+                        "27 Ιουνίου",
+                        "27 Ιουλίου",
+                        "27 Αυγούστου",
+                        "17 Ιουλίου",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Η εορτή του είναι στις 27 Ιουλίου.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Η εορτή του είναι στις 27 Ιουλίου.",
+                },
+                {
+                    q: "27. Ο Άγιος Ερμόλαος μαρτύρησε σε σχέση με τον Άγιο Παντελεήμονα;",
+                    type: "mc",
+                    opts: [
+                        "Μαζί την ίδια μέρα",
+                        "Μετά τον Παντελεήμονα",
+                        "Πριν τον Παντελεήμονα",
+                        "Δεν μαρτύρησε",
+                    ],
+                    correct: 2,
+                    feedback_correct:
+                        "Σωστά! Ο Άγιος Ερμόλαος μαρτύρησε πριν τον Άγιο Παντελεήμονα.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: γ. Ο Άγιος Ερμόλαος μαρτύρησε πριν τον Άγιο Παντελεήμονα.",
+                },
+                {
+                    q: "28. Σε ποιο βουνό βρίσκεται η περίφημη Μονή Αγίου Παντελεήμονος;",
+                    type: "mc",
+                    opts: [
+                        "Όλυμπος",
+                        "Άθως (Άγιο Όρος)",
+                        "Σινά",
+                        "Άθηναι",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Η Μονή Αγίου Παντελεήμονος βρίσκεται στο Άγιο Όρος.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Η Μονή Αγίου Παντελεήμονος βρίσκεται στο Άγιο Όρος.",
+                },
+                {
+                    q: "29. Με ποιον Απόστολο μοιράζεται ο Άγιος το θαύμα του αίματος και γάλακτος;",
+                    type: "mc",
+                    opts: [
+                        "Απόστολος Πέτρος",
+                        "Απόστολος Παύλος",
+                        "Απόστολος Ιωάννης",
+                        "Απόστολος Ιάκωβος",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ο Απόστολος Παύλος — και στους δύο έρρευσε αίμα και γάλα κατά τον αποκεφαλισμό.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ο Απόστολος Παύλος — και στους δύο έρρευσε αίμα και γάλα κατά τον αποκεφαλισμό.",
+                },
+                {
+                    q: "30. Ποιοι τίτλοι αποδίδονται επίσημα στον Άγιο Παντελεήμονα;",
+                    type: "mc",
+                    opts: [
+                        "Ισαπόστολος και Ιεράρχης",
+                        "Μεγαλομάρτυρας και Ανάργυρος",
+                        "Οσιομάρτυρας και Θαυματουργός",
+                        "Ιερομάρτυρας και Δίκαιος",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Μεγαλομάρτυρας και Ανάργυρος.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Μεγαλομάρτυρας και Ανάργυρος.",
+                },
+                {
+                    q: "31. Γιατί ο Άγιος ονομάζεται «Ιαματικός»;",
+                    type: "mc",
+                    opts: [
+                        "Γιατί έγραψε ιατρικά βιβλία",
+                        "Γιατί χαρίζει ιάσεις με τη χάρη του",
+                        "Γιατί ήταν ο καλύτερος ιατρός της εποχής",
+                        "Γιατί ίδρυσε νοσοκομείο",
+                    ],
+                    correct: 1,
+                    feedback_correct:
+                        "Σωστά! Ονομάζεται «Ιαματικός» γιατί η χάρη του χαρίζει θεραπείες ακόμα και σήμερα.",
+                    feedback_wrong:
+                        "Σωστή απάντηση: β. Ονομάζεται «Ιαματικός» γιατί η χάρη του χαρίζει θεραπείες ακόμα και σήμερα.",
+                },
+            ];
+
+            // State
+            let cur = 0;
+            let score = 0;
+            let picked = null; // index of picked option, or true/false for tf
+            let answered = new Array(QS.length).fill(null); // null | {picked, correct}
+            let started = false; // skip the scroll on first render
+
+            function $(id) {
+                return document.getElementById(id);
+            }
+
+            function scrollToQuiz() {
+                if (!started) return;
+                const el = document.querySelector(".quiz");
+                if (el)
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            function go() {
+                scrollToQuiz();
+                if (cur >= QS.length) {
+                    showResult();
+                    return;
+                }
+                showQuestion();
+            }
+
+            function showQuestion() {
+                $("quizProg").classList.remove("quiz-hidden");
+
+                const pct = Math.round(((cur + 1) / QS.length) * 100);
+                $("quizProgTxt").textContent =
+                    `Ερώτηση ${cur + 1} / ${QS.length}`;
+                $("quizProgPct").textContent = pct + "%";
+                $("quizProgFill").style.width = pct + "%";
+
+                const q = QS[cur];
+                const ans = answered[cur];
+                const isAnswered = ans !== null;
+
+                let inputHtml = "";
+
+                if (q.type === "mc") {
+                    const letters = ["α", "β", "γ", "δ"];
+                    inputHtml =
+                        `<div class="quiz-opts">` +
+                        q.opts
+                            .map((opt, i) => {
+                                let cls = "quiz-opt";
+                                if (isAnswered) {
+                                    if (i === q.correct) cls += " correct-opt";
+                                    else if (i === ans.picked)
+                                        cls += " wrong-opt";
+                                } else if (ans === null && picked === i) {
+                                    cls += " picked";
+                                }
+                                return `<button class="${cls}" onclick="pickMC(${i})" ${isAnswered ? "disabled" : ""}>
+        <span class="quiz-opt-letter">${letters[i]}</span>
+        <span>${opt}</span>
+      </button>`;
+                            })
+                            .join("") +
+                        `</div>`;
+                } else {
+                    // true/false
+                    let trueClass = "quiz-tf-btn",
+                        falseClass = "quiz-tf-btn";
+                    if (isAnswered) {
+                        if (q.correct === true) {
+                            trueClass += " correct-tf";
+                            falseClass += " wrong-tf";
+                        } else {
+                            falseClass += " correct-tf";
+                            trueClass += " wrong-tf";
+                        }
+                    }
+                    inputHtml = `<div class="quiz-tf-row">
+      <button class="${trueClass}" onclick="pickTF(true)" ${isAnswered ? "disabled" : ""}>✓ Σωστό</button>
+      <button class="${falseClass}" onclick="pickTF(false)" ${isAnswered ? "disabled" : ""}>✗ Λάθος</button>
+    </div>`;
+                }
+
+                // Feedback
+                let feedbackHtml = "";
+                if (isAnswered) {
+                    const ok = ans.correct;
+                    feedbackHtml = `<div class="quiz-feedback ${ok ? "correct" : "wrong"}">
+      <span class="quiz-feedback-icon">${ok ? "✅" : "❌"}</span>
+      ${ok ? q.feedback_correct : q.feedback_wrong}
+    </div>`;
+                }
+
+                // Next button label
+                const isLast = cur === QS.length - 1;
+                const nextLabel = isLast
+                    ? "Δείξε αποτέλεσμα →"
+                    : "Επόμενο →";
+
+                $("quizApp").innerHTML = `
+    <div class="quiz-card quiz-anim">
+      <div class="quiz-qnum">Ερώτηση ${String(cur + 1).padStart(2, "0")}</div>
+      <div class="quiz-qtxt">${q.q}</div>
+      ${inputHtml}
+      ${feedbackHtml}
+    </div>
+    <div class="quiz-nav">
+      <button class="quiz-btn quiz-btn-sec" ${cur === 0 ? 'style="visibility:hidden"' : ""} onclick="goBack()">← Πίσω</button>
+      <button class="quiz-btn quiz-btn-pri" id="quizNextBtn" ${isAnswered ? "" : "disabled"} onclick="goNext()">${nextLabel}</button>
+    </div>
+  `;
+            }
+
+            function pickMC(i) {
+                if (answered[cur] !== null) return;
+                const q = QS[cur];
+                const correct = i === q.correct;
+                answered[cur] = { picked: i, correct };
+                if (correct) score++;
+                showQuestion();
+            }
+
+            function pickTF(val) {
+                if (answered[cur] !== null) return;
+                const q = QS[cur];
+                const correct = val === q.correct;
+                answered[cur] = { picked: val, correct };
+                if (correct) score++;
+                showQuestion();
+            }
+
+            function goNext() {
+                started = true;
+                cur++;
+                go();
+            }
+
+            function goBack() {
+                if (cur > 0) {
+                    started = true;
+                    cur--;
+                    go();
+                }
+            }
+
+            function showResult() {
+                $("quizProg").classList.add("quiz-hidden");
+
+                const pct = Math.round((score / QS.length) * 100);
+                let stars = "";
+                if (pct >= 90) stars = "⭐⭐⭐⭐⭐";
+                else if (pct >= 75) stars = "⭐⭐⭐⭐";
+                else if (pct >= 60) stars = "⭐⭐⭐";
+                else if (pct >= 40) stars = "⭐⭐";
+                else stars = "⭐";
+
+                let msg = "";
+                if (pct >= 90)
+                    msg =
+                        "Εξαιρετικό! Γνωρίζεις πολύ καλά τον Άγιο Παντελεήμονα!";
+                else if (pct >= 75)
+                    msg =
+                        "Πολύ καλά! Θυμάσαι τα περισσότερα από τον βίο του!";
+                else if (pct >= 60)
+                    msg =
+                        "Καλά! Ίσως αξίζει να ξαναδιαβάσεις τον βίο του Αγίου.";
+                else
+                    msg =
+                        "Συνέχισε! Διάβασε ξανά τον βίο του Αγίου και δοκίμασε πάλι!";
+
+                $("quizApp").innerHTML = `
+    <div class="quiz-card quiz-result quiz-anim">
+      <div class="quiz-result-icon">✝</div>
+      <h2>Αποτέλεσμα Κουίζ</h2>
+      <div class="quiz-result-score">${score} / ${QS.length}</div>
+      <div class="quiz-stars">${stars}</div>
+      <div class="quiz-result-msg">${msg}</div>
+      <div class="quiz-sc-grid">
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#2e7d32">${score}</div>
+          <div class="lbl">Σωστές</div>
+        </div>
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#b3261e">${QS.length - score}</div>
+          <div class="lbl">Λάθος</div>
+        </div>
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#b266ff">${pct}%</div>
+          <div class="lbl">Επιτυχία</div>
+        </div>
+        <div class="quiz-sc-item">
+          <div class="num" style="color:#cd8602">${QS.length}</div>
+          <div class="lbl">Συνολικές</div>
+        </div>
+      </div>
+      <div class="quiz-result-sub">«Άγιε Παντελεήμον, πρέσβευε υπέρ ημών!»</div>
+      <button class="quiz-btn quiz-btn-pri" onclick="restart()" style="margin-top:8px">Επανάληψη ↺</button>
+    </div>
+  `;
+            }
+
+            function restart() {
+                cur = 0;
+                score = 0;
+                answered = new Array(QS.length).fill(null);
+                $("quizProg").classList.remove("quiz-hidden");
+                go();
+            }
+
+            go();
+        </script>
+    </body>
+</html>
