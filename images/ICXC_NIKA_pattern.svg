@@ -15,12 +15,12 @@
             <path style="text-align:center;" d="m145.46,20.813c0.71975-0.05828,1.3669-0.39019,1.9415-0.99571,0.57448-0.60548,0.87826-1.1347,0.91133-1.5877,0.004-0.33637-0.10996-0.63239-0.34332-0.88807-0.23336-0.25564-0.61195-0.39019-1.1358-0.40366h-24.196c-0.66477,0.03889-1.2635,0.3379-1.7962,0.89703-0.5327,0.55917-0.81444,1.1452-0.84527,1.7582,0.008,0.33341,0.15191,0.61747,0.43585,0.85218,0.28386,0.23473,0.66698,0.35733,1.149,0.36778z" fill="#000"/>
         </g>
     </defs>
-    <use href="#cross" x="40" y="40"/>
-    <use href="#cross" x="820" y="40"/>
-    <use href="#cross" x="300" y="300"/>
-    <use href="#cross" x="1080" y="300"/>
-    <use href="#cross" x="560" y="560"/>
-    <use href="#cross" x="40" y="820"/>
-    <use href="#cross" x="820" y="820"/>
-    <use href="#cross" x="300" y="1080"/>
+    <use href="#cross" x="40" y="40" transform="rotate(-8 125 122)"/>
+    <use href="#cross" x="820" y="40" transform="rotate(8 905 122)"/>
+    <use href="#cross" x="300" y="300" transform="rotate(-7 385 382)"/>
+    <use href="#cross" x="1080" y="300" transform="rotate(-8 1165 382)"/>
+    <use href="#cross" x="560" y="560" transform="rotate(-6 645 642)"/>
+    <use href="#cross" x="40" y="820" transform="rotate(-4 125 902)"/>
+    <use href="#cross" x="820" y="820" transform="rotate(-5 905 902)"/>
+    <use href="#cross" x="300" y="1080" transform="rotate(-3 385 1162)"/>
 </svg>

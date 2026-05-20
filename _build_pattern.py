@@ -27,6 +27,18 @@ PAD = 40  # padding inside each cell, before the cross
 COLS = ROWS = 5
 TOTAL = CELL * COLS  # 1300
 
+# Approximate center of the #cross symbol in its own coordinate space (the
+# cross spans roughly 3..167 in x and 3..160 in y). Used as the rotation
+# pivot so each cross tilts in place instead of swinging around its origin.
+CROSS_CX = 85
+CROSS_CY = 82
+
+# Small, deterministic per-cell tilt (degrees). Kept under ±10° so the
+# pattern still reads as a neat grid. Indexed by (row, col).
+def cell_angle(r, c):
+    # Pseudo-random but stable: mix r,c into a small signed angle.
+    return ((r * 7 + c * 11) % 17) - 8
+
 src_text = SRC.read_text(encoding="utf-8")
 paths = re.findall(r"<path\s[^>]*?/>", src_text)
 assert paths, "no <path> elements extracted"
@@ -38,11 +50,15 @@ for r, row in enumerate(GRID):
     assert len(cells) == COLS, f"row {r} has {len(cells)} cells, expected {COLS}"
     for c, mark in enumerate(cells):
         if mark == "X":
-            positions.append((c * CELL + PAD, r * CELL + PAD))
+            x = c * CELL + PAD
+            y = r * CELL + PAD
+            positions.append((x, y, cell_angle(r, c)))
 print(f"placing {len(positions)} crosses")
 
 uses = "\n    ".join(
-    f'<use href="#cross" x="{x}" y="{y}"/>' for x, y in positions
+    f'<use href="#cross" x="{x}" y="{y}" '
+    f'transform="rotate({a} {x + CROSS_CX} {y + CROSS_CY})"/>'
+    for x, y, a in positions
 )
 
 cross_paths = "\n            ".join(paths)
